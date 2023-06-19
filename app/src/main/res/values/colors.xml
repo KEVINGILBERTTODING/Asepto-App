@@ -5,5 +5,9 @@
     <color name="background">#1F2024</color>
     <color name="bottom_bar">#2C2D31</color>
     <color name="font_color">#E0E0E0</color>
+    <color name="black2">#2C2D31</color>
+    <color name="blue">#3367B2</color>
+
+
 
 </resources>
