@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        android:id="@+id/menuHome"/>
+
+    <item
+        android:icon="@drawable/ic_project"
+        android:title="Project"
+        android:id="@+id/menuProject"/>
+
+    <item
+        android:icon="@drawable/ic_review"
+        android:title="Review"
+        android:id="@+id/menuReview"/>
+
+    <item
+        android:icon="@drawable/ic_tambahan"
+        android:title="Catatan"
+        android:id="@+id/menuTambahan"/>
+
+
+</menu>

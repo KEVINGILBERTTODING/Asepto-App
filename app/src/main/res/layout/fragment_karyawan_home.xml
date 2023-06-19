@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:background="@color/background"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.karyawan.home.KaryawanHomeFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/background"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="@dimen/_19sdp"
+                        android:layout_height="@dimen/_19sdp"
+                        android:src="@drawable/main_icon"/>
+
+                </RelativeLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:id="@+id/cvProjectSelesai"
+                        app:contentPadding="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_15sdp"
+                        app:cardBackgroundColor="@color/bottom_bar"
+                        android:layout_height="@dimen/_100sdp">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_project_selesai"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:fontFamily="@font/popsem"
+                                    android:textColor="@color/font_color"
+                                    android:text="Riwayat Project Selesai"/>
+
+                                <TextView
+                                    android:id="@+id/tvTotalProjectSelesai"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_alignParentLeft="true"
+                                    android:fontFamily="@font/popsem"
+                                    android:layout_alignParentBottom="true"
+                                    android:gravity="bottom"
+                                    android:textSize="@dimen/_30ssp"
+                                    android:textColor="@color/font_color"
+                                    android:text="02"/>
+
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:id="@+id/cvTotalProject"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        app:contentPadding="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_15sdp"
+                        app:cardBackgroundColor="@color/bottom_bar"
+                        android:layout_height="@dimen/_100sdp">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_project_all"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:fontFamily="@font/popsem"
+                                    android:textColor="@color/font_color"
+                                    android:text="Total Project"/>
+
+                                <TextView
+                                    android:id="@+id/tvTotalProject"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_alignParentLeft="true"
+                                    android:fontFamily="@font/popsem"
+                                    android:layout_alignParentBottom="true"
+                                    android:gravity="bottom"
+                                    android:textSize="@dimen/_30ssp"
+                                    android:textColor="@color/font_color"
+                                    android:text="02"/>
+
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:id="@+id/cvTotalProjectSedangBerjalan"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        app:contentPadding="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_15sdp"
+                        app:cardBackgroundColor="@color/bottom_bar"
+                        android:layout_height="@dimen/_100sdp">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_project_sedang_nerjalan"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:fontFamily="@font/popsem"
+                                android:textColor="@color/font_color"
+                                android:text="Riwayat Project Sedang Berjalan"/>
+
+                                <TextView
+                                    android:id="@+id/tvTotalProjectSedangBerjalan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:layout_alignParentLeft="true"
+                                    android:fontFamily="@font/popsem"
+                                    android:layout_alignParentBottom="true"
+                                    android:gravity="bottom"
+                                    android:textSize="@dimen/_30ssp"
+                                    android:textColor="@color/font_color"
+                                    android:text="02"/>
+
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </RelativeLayout>
+</layout>
