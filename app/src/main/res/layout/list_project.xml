@@ -58,12 +58,14 @@
 
             </RelativeLayout>
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:background="@color/bottom_bar"
                 android:id="@+id/layoutDetail"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:backgroundTint="@color/bottom_bar"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical">
@@ -71,7 +73,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="@color/font_color"/>
+                    android:background="@color/black3"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -91,12 +93,18 @@
                     android:textSize="@dimen/_9ssp"
                     android:textColor="@color/font_color"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Project Scope"
                     android:fontFamily="@font/popmed"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:textSize="@dimen/_8ssp"
                     android:textColor="@color/font_color"/>
 
@@ -110,12 +118,18 @@
                     android:textSize="@dimen/_9ssp"
                     android:textColor="@color/font_color"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Deadline"
                     android:fontFamily="@font/popmed"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:textSize="@dimen/_8ssp"
                     android:textColor="@color/font_color"/>
 
@@ -159,12 +173,18 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Deskripsi"
                     android:fontFamily="@font/popmed"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:textSize="@dimen/_8ssp"
                     android:textColor="@color/font_color"/>
 

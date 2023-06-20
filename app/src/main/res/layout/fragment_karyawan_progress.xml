@@ -23,24 +23,35 @@
                     android:layout_height="@dimen/_20sdp"
                     android:backgroundTint="@color/font_color"
                     android:id="@+id/btnBack"
-                    android:layout_centerVertical="true"
                     android:background="@drawable/baseline_arrow_back_ios_24"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/btnBack"
-                    android:text="Daftar Project"
+                    android:text="Daftar Progress"
+                    android:id="@+id/tv1"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_centerVertical="true"
                     android:textSize="@dimen/_15ssp"
                     android:fontFamily="@font/popsem"
+                    android:textColor="@color/font_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btnBack"
+                    android:text="Nama Project"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:textSize="@dimen/_10ssp"
+                    android:id="@+id/tvNamaProject"
+                    android:layout_below="@id/tv1"
+                    android:fontFamily="@font/popmed"
                     android:textColor="@color/font_color"/>
             </RelativeLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProject"
+            android:id="@+id/rvProgress"
             android:layout_below="@id/appBar"
             android:layout_marginTop="@dimen/_20sdp"
             tools:listitem="@layout/list_project"

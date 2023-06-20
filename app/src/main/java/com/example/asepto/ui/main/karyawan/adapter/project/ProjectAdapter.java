@@ -1,6 +1,7 @@
 package com.example.asepto.ui.main.karyawan.adapter.project;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asepto.R;
 import com.example.asepto.data.model.ProjectModel;
+import com.example.asepto.ui.main.karyawan.progress.KaryawanProgressFragment;
 
 import java.util.List;
 
@@ -72,7 +76,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         return projectModelList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
         ImageView ivAction, ivAction2;
         TextView tvnNamaPerusahaan, tvEmail, tvProjectScope, tvTgllMulai,
         tvTglSelesai, tvDeskripsi;
@@ -92,6 +96,21 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             lrDetail = itemView.findViewById(R.id.layoutDetail);
             btnProgress = itemView.findViewById(R.id.btnProgress);
             rlAction = itemView.findViewById(R.id.rlAction);
+
+            btnProgress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragment = new KaryawanProgressFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("nama_project", projectModelList.get(getAdapterPosition()).getNamaProject());
+                    bundle.putString("project_id", projectModelList.get(getAdapterPosition()).getProjectId());
+                    fragment.setArguments(bundle);
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frameKaryawn, fragment).addToBackStack(null)
+                            .commit();
+                }
+            });
         }
+
     }
 }

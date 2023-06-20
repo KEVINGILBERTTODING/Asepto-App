@@ -9,7 +9,7 @@
     <style name="Theme.Asepto" parent="Base.Theme.Asepto" />
 
     <style name="BottomNavigationTitleStyle" parent="TextAppearance.Design.Tab">
-        <item name="android:textColor">@color/font_color</item>
+        <item name="android:textColor">@color/blue</item>
         <!-- Anda juga dapat menambahkan atribut lain untuk mengkustomisasi judul -->
     </style>
 </resources>
