@@ -22,25 +22,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/black2">
 
-                <RelativeLayout
-                    android:id="@+id/rlAction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:src="@drawable/add_square"
-                        android:id="@+id/ivIconAction"/>
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:visibility="gone"
-                        android:layout_height="@dimen/_20sdp"
-                        android:src="@drawable/minus_squar"
-                        android:id="@+id/ivIconAction2"/>
-
-                </RelativeLayout>
 
 
 
@@ -48,25 +30,20 @@
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_toRightOf="@id/rlAction"
-                    android:text="50%"
+                    android:text="Add Progress"
                     android:id="@+id/tvProgress"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/font_color"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_alignParentRight="true"
-                    android:text="2023-02-023-203"
-                    android:id="@+id/tvDate"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_9ssp"
-                    android:textColor="@color/font_color"/>
+                <ImageButton
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:background="@drawable/ic_times"
+                    android:id="@+id/btnClose"
+                    android:layout_alignParentRight="true"/>
+
+
 
             </RelativeLayout>
 
@@ -76,7 +53,6 @@
                 android:layout_width="match_parent"
                 android:background="@color/bottom_bar"
                 android:id="@+id/layoutDetail"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/bottom_bar"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -91,7 +67,34 @@
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
-                    android:text="Detail"
+                    android:text="Progress"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edittext_layout"
+                    android:padding="@dimen/_10sdp"
+                    android:id="@+id/etprogress"
+                    android:hint="1-100%"
+                    android:inputType="number"
+                    android:textColorHint="@color/font_color"
+                    android:textColor="@color/font_color"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:gravity="start"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:text="Detail progress"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_9ssp"
@@ -103,8 +106,7 @@
                     android:background="@drawable/edittext_layout"
                     android:padding="@dimen/_10sdp"
                     android:id="@+id/etDetail"
-                    android:hint="Detail"
-                    android:enabled="false"
+                    android:hint="Tambahkan detail progress"
                     android:textColorHint="@color/font_color"
                     android:textColor="@color/font_color"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -117,18 +119,7 @@
 
 
 
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ubah"
-                    app:cornerRadius="@dimen/_10sdp"
-                    android:id="@+id/btnUbah"
-                    android:backgroundTint="@color/yellow"
-                    android:textSize="@dimen/_9ssp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_gravity="end"/>
-
+z
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -137,9 +128,10 @@
                     android:id="@+id/btnSimpan"
                     android:backgroundTint="@color/blue"
                     android:textSize="@dimen/_9ssp"
-                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_gravity="end"/>
+
+
 
             </LinearLayout>
 

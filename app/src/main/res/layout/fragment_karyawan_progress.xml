@@ -69,6 +69,16 @@
             android:fontFamily="@font/popsem"
             android:textColor="@color/font_color"/>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/bottom_bar"
+            android:id="@+id/btnAdd"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/baseline_add_24"
+            android:layout_alignParentRight="true"
+            app:tint="@color/blue"/>
+
 
     </RelativeLayout>
 
