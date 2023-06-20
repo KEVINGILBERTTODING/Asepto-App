@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.asepto.R;
+import com.example.asepto.ui.main.karyawan.catatan.KaryawanCatatanFragment;
 import com.example.asepto.ui.main.karyawan.home.KaryawanHomeFragment;
+import com.example.asepto.ui.main.karyawan.project.KaryawanProjectFragment;
+import com.example.asepto.ui.main.karyawan.project.KaryawanProjectNavbarFragment;
 import com.example.asepto.ui.main.karyawan.review.KaryawanReviewFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -35,6 +38,12 @@ public class KaryawanMainActivty extends AppCompatActivity {
                     return true;
                 }else if (item.getItemId() == R.id.menuReview) {
                     replace(new KaryawanReviewFragment());
+                    return true;
+                }else if (item.getItemId() == R.id.menuTambahan) {
+                    replace(new KaryawanCatatanFragment());
+                    return true;
+                }else if (item.getItemId() == R.id.menuProject) {
+                    replace(new KaryawanProjectNavbarFragment());
                     return true;
                 }
                 return false;

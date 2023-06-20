@@ -53,7 +53,9 @@ public class KaryawanProjectFragment extends Fragment {
         karyawanService = ApiConfig.getClient().create(KaryawanService.class);
         userId = sharedPreferences.getString(Constans.USER_ID, null);
         status = getArguments().getString("status_id");
-        Log.d("cek status", "onCreateView: " + status);
+
+
+
 
         return binding.getRoot();
     }
@@ -62,6 +64,7 @@ public class KaryawanProjectFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getProject(status);
+
         listener();
     }
 

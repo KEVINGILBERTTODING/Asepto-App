@@ -23,6 +23,7 @@
                     android:layout_height="@dimen/_20sdp"
                     android:backgroundTint="@color/font_color"
                     android:id="@+id/btnBack"
+                    android:visibility="gone"
                     android:background="@drawable/baseline_arrow_back_ios_24"/>
 
                 <TextView
@@ -31,7 +32,6 @@
                     android:layout_toRightOf="@id/btnBack"
                     android:text="Daftar Progress"
                     android:id="@+id/tv1"
-                    android:layout_marginLeft="@dimen/_10sdp"
                     android:textSize="@dimen/_15ssp"
                     android:fontFamily="@font/popsem"
                     android:textColor="@color/font_color"/>
@@ -41,7 +41,6 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/btnBack"
                     android:text="Nama Project"
-                    android:layout_marginLeft="@dimen/_10sdp"
                     android:textSize="@dimen/_10ssp"
                     android:id="@+id/tvNamaProject"
                     android:layout_below="@id/tv1"

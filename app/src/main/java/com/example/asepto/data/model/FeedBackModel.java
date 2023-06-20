@@ -1,11 +1,10 @@
 package com.example.asepto.data.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class FeddBackModel implements Serializable {
+public class FeedBackModel implements Serializable {
 
     @SerializedName("feedback_id")
     private String feedbackId;
@@ -28,7 +27,7 @@ public class FeddBackModel implements Serializable {
     @SerializedName("nama")
     private String nama;
 
-    public FeddBackModel(String feedbackId, String projectId, String karyawanId, String namaProject, String feedback, String adminId, String nama) {
+    public FeedBackModel(String feedbackId, String projectId, String karyawanId, String namaProject, String feedback, String adminId, String nama) {
         this.feedbackId = feedbackId;
         this.projectId = projectId;
         this.karyawanId = karyawanId;

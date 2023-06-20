@@ -1,4 +1,4 @@
-package com.example.asepto.ui.main.karyawan.adapter.review;
+package com.example.asepto.ui.main.karyawan.adapter.catatan;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,35 +15,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.asepto.R;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
-import com.example.asepto.data.model.FeedBackModel;
+import com.example.asepto.data.model.CatatanModel;
 
 import java.util.List;
 
 
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
+public class CatatanAdapter extends RecyclerView.Adapter<CatatanAdapter.ViewHolder> {
     Context context;
-    List<FeedBackModel> feedBackModelList;
+    List<CatatanModel> catatanModelList;
     private AlertDialog progressDialog;
     private KaryawanService karyawanService;
 
-    public ReviewAdapter(Context context, List<FeedBackModel> feedBackModelList) {
+    public CatatanAdapter(Context context, List<CatatanModel> catatanModelList) {
         this.context = context;
-        this.feedBackModelList = feedBackModelList;
+        this.catatanModelList = catatanModelList;
     }
 
     @NonNull
     @Override
-    public ReviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.list_review, parent, false);
+    public CatatanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.list_catatan, parent, false);
         return new ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReviewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CatatanAdapter.ViewHolder holder, int position) {
 
-        holder.tvProjectName.setText(feedBackModelList.get(holder.getAdapterPosition()).getNamaProject());
-        holder.tvReview.setText(feedBackModelList.get(holder.getAdapterPosition()).getFeedback());
+        holder.tvCatatan.setText(catatanModelList.get(holder.getAdapterPosition()).getCatatan());
+        holder.tvDate.setText(catatanModelList.get(holder.getAdapterPosition()).getTanggalEvent());
 
 
 
@@ -72,20 +72,20 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return feedBackModelList.size();
+        return catatanModelList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivAction, ivAction2;
-        TextView tvReview, tvProjectName;
+        TextView tvDate, tvCatatan;
         LinearLayout lrDetail;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             ivAction = itemView.findViewById(R.id.ivIconAction);
             ivAction2 = itemView.findViewById(R.id.ivIconAction2);
-            tvReview = itemView.findViewById(R.id.tvReview);
-            tvProjectName = itemView.findViewById(R.id.tvNamaProject);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvCatatan = itemView.findViewById(R.id.tvCatatan);
             lrDetail = itemView.findViewById(R.id.layoutDetail);
             karyawanService = ApiConfig.getClient().create(KaryawanService.class);
 

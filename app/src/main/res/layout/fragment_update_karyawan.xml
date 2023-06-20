@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_10sdp"
+        android:background="@color/background"
+        tools:context=".ui.main.admin.karyawan.UpdateKaryawanFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:id="@+id/appBar"
+            android:background="@color/background"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:backgroundTint="@color/font_color"
+                    android:id="@+id/btnBack"
+                    android:background="@drawable/baseline_arrow_back_ios_24"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btnBack"
+                    android:text="Update Karyawan"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:id="@+id/tv1"
+                    android:textSize="@dimen/_15ssp"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/font_color"/>
+
+
+
+
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@id/appBar"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Karyawan"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edittext_layout"
+                    android:padding="@dimen/_10sdp"
+                    android:id="@+id/etNamaKaryawan"
+                    android:textColorHint="@color/font_color"
+                    android:textColor="@color/font_color"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edittext_layout"
+                    android:padding="@dimen/_10sdp"
+                    android:id="@+id/etEmail"
+                    android:textColorHint="@color/font_color"
+                    android:textColor="@color/font_color"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Telepon"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edittext_layout"
+                    android:padding="@dimen/_10sdp"
+                    android:inputType="number"
+                    android:id="@+id/etTelepon"
+                    android:textColorHint="@color/font_color"
+                    android:textColor="@color/font_color"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:text="No Rekening"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edittext_layout"
+                    android:padding="@dimen/_10sdp"
+                    android:inputType="number"
+                    android:id="@+id/etNoRek"
+                    android:textColorHint="@color/font_color"
+                    android:textColor="@color/font_color"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Bank"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edittext_layout"
+                    android:padding="@dimen/_10sdp"
+                    android:id="@+id/etNamaBank"
+                    android:textColorHint="@color/font_color"
+                    android:textColor="@color/font_color"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis Kelamin"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:background="@drawable/searchbar_layout"
+                    android:padding="@dimen/_10sdp"
+                    android:id="@+id/spJk"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_10ssp"
+                    style="@style/SpinnerStyle"
+
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Posisi Jabatan"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:background="@drawable/searchbar_layout"
+                    android:padding="@dimen/_10sdp"
+                    android:id="@+id/spJabatan"
+                    android:textColorHint="@color/font_color"
+                    android:textColor="@color/font_color"
+                    style="@style/SpinnerStyle"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSimpan"
+                    android:backgroundTint="@color/blue"
+                    app:cornerRadius="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Simpan"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBatal"
+                    android:backgroundTint="@color/black4"
+                    app:cornerRadius="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Batal"/>
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </RelativeLayout>
+</layout>

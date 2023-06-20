@@ -28,6 +28,13 @@
                         android:layout_height="@dimen/_19sdp"
                         android:src="@drawable/main_icon"/>
 
+                    <ImageButton
+                        android:layout_width="@dimen/_20sdp"
+                        android:id="@+id/btnClose"
+                        android:layout_height="@dimen/_20sdp"
+                        android:background="@drawable/ic_menu_right"
+                        android:layout_alignParentRight="true"/>
+
                 </RelativeLayout>
 
             </com.google.android.material.appbar.AppBarLayout>

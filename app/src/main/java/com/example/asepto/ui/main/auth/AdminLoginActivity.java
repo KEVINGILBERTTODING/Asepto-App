@@ -15,6 +15,7 @@ import com.example.asepto.R;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.AuthService;
 import com.example.asepto.data.model.ResponseModel;
+import com.example.asepto.ui.main.admin.AdminMainActivty;
 import com.example.asepto.ui.main.karyawan.KaryawanMainActivty;
 import com.example.asepto.util.Constans;
 
@@ -43,12 +44,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(Constans.SHARED_PREF_NAME, MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        if (sharedPreferences.getBoolean("login", false) == true){
-            if (sharedPreferences.getInt(Constans.ROLE, 0) == 1) {
-                startActivity(new Intent(AdminLoginActivity.this, AdminLoginActivity.class));
-                finish();
-            }
-        }
+
     }
 
     private void init(){
@@ -91,12 +87,12 @@ public class AdminLoginActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                         showProgressBar("sd", "SD", false);
                         if (response.isSuccessful() && response.body().getCode() == 200) {
-                            if (response.body().getRole() == 1) { // karyawan
+                            if (response.body().getRole() == 1) { // admin
                                 editor.putBoolean("login", true);
                                 editor.putString(Constans.USER_ID, response.body().getUserId());
                                 editor.putInt(Constans.ROLE, response.body().getRole());
                                 editor.apply();
-                                startActivity(new Intent(AdminLoginActivity.this, KaryawanMainActivty.class));
+                                startActivity(new Intent(AdminLoginActivity.this, AdminMainActivty.class));
                                 finish();
 
                             }else {

@@ -24,23 +24,23 @@
                     android:backgroundTint="@color/font_color"
                     android:id="@+id/btnBack"
                     android:visibility="gone"
-                    android:layout_centerVertical="true"
                     android:background="@drawable/baseline_arrow_back_ios_24"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/btnBack"
-                    android:text="Daftar Project"
-                    android:layout_centerVertical="true"
+                    android:text="Daftar Catatan Tambahan"
+                    android:id="@+id/tv1"
                     android:textSize="@dimen/_15ssp"
                     android:fontFamily="@font/popsem"
                     android:textColor="@color/font_color"/>
+
             </RelativeLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProject"
+            android:id="@+id/tvCatatan"
             android:layout_below="@id/appBar"
             android:layout_marginTop="@dimen/_20sdp"
             tools:listitem="@layout/list_project"
@@ -50,13 +50,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tidak ada project."
+            android:text="Tidak ada catatan."
             android:id="@+id/tvEmpty"
             android:layout_centerInParent="true"
             android:textSize="@dimen/_10ssp"
             android:visibility="gone"
             android:fontFamily="@font/popsem"
             android:textColor="@color/font_color"/>
+
 
 
     </RelativeLayout>

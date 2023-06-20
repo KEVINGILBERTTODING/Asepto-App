@@ -15,6 +15,7 @@ import com.example.asepto.R;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.AuthService;
 import com.example.asepto.data.model.ResponseModel;
+import com.example.asepto.ui.main.admin.AdminMainActivty;
 import com.example.asepto.ui.main.karyawan.KaryawanMainActivty;
 import com.example.asepto.util.Constans;
 
@@ -45,6 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         if (sharedPreferences.getBoolean("login", false) == true){
             if (sharedPreferences.getInt(Constans.ROLE, 0) == 2) {
                 startActivity(new Intent(LoginActivity.this, KaryawanMainActivty.class));
+                finish();
+            }else {
+                startActivity(new Intent(LoginActivity.this, AdminMainActivty.class));
                 finish();
             }
         }
@@ -96,10 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(new Intent(LoginActivity.this, KaryawanMainActivty.class));
                                 finish();
 
-                            }else {
-                                showToast("err", "Terjadi kesalahan");
-
                             }
+
 
                         }else {
                             showToast("err", response.body().getMessage());

@@ -1,26 +1,39 @@
-package com.example.asepto.ui.main.karyawan.review;
+package com.example.asepto.ui.main.admin.karyawan;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.asepto.R;
+import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
-import com.example.asepto.data.model.FeedBackModel;
 import com.example.asepto.data.model.KaryawanModel;
-import com.example.asepto.databinding.FragmentKaryawanReviewBinding;
-import com.example.asepto.ui.main.karyawan.adapter.review.ReviewAdapter;
+import com.example.asepto.data.model.ProgressModel;
+import com.example.asepto.data.model.ResponseModel;
+import com.example.asepto.databinding.FragmentAdminKaryawanBinding;
+import com.example.asepto.databinding.FragmentKaryawanProgressBinding;
+import com.example.asepto.ui.main.admin.adapter.karyawan.KaryawanAdapter;
+import com.example.asepto.ui.main.karyawan.adapter.progress.ProgressAdapter;
 import com.example.asepto.util.Constans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -28,15 +41,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KaryawanReviewFragment extends Fragment {
+public class AdminKaryawanFragment extends Fragment {
 
-    private FragmentKaryawanReviewBinding binding;
-    private List<FeedBackModel> feddBackModelList;
+    private FragmentAdminKaryawanBinding binding;
+    private List<KaryawanModel> karyawanModelList;
     private LinearLayoutManager linearLayoutManager;
-    private KaryawanService karyawanService;
-    private SharedPreferences sharedPreferences;
-    private String userId;
-    private ReviewAdapter reviewAdapter;
+    private AdminService adminService;
+    private KaryawanAdapter karyawanAdapter;
     private AlertDialog progressDialog;
 
 
@@ -44,10 +55,8 @@ public class KaryawanReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentKaryawanReviewBinding.inflate(inflater, container, false);
-        sharedPreferences = getContext().getSharedPreferences(Constans.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        karyawanService = ApiConfig.getClient().create(KaryawanService.class);
-        userId = sharedPreferences.getString(Constans.USER_ID, null);
+        binding = FragmentAdminKaryawanBinding.inflate(inflater, container, false);
+        adminService = ApiConfig.getClient().create(AdminService.class);
 
         return binding.getRoot();
     }
@@ -55,11 +64,11 @@ public class KaryawanReviewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getFeedBack();
-        getMyProfile();
+        getAllKaryawan();
         listener();
 
     }
+
 
     private void listener() {
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -71,60 +80,71 @@ public class KaryawanReviewFragment extends Fragment {
 
 
     }
-    private void getMyProfile() {
-        showProgressBar("Loading", "Memuat data...", true);
-        karyawanService.getMyProfile(userId).enqueue(new Callback<KaryawanModel>() {
-            @Override
-            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
-                showProgressBar("d", "d", false);
-                if (response.isSuccessful() && response.body() != null) {
 
-                }else {
-                    showToast("err", "Tidak dapat memuat data");
-                }
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
-            public void onFailure(Call<KaryawanModel> call, Throwable t) {
-                showProgressBar("d", "d", false);
-                showToast("err", "Tidak ada koneksi internet");
-
-
-
-
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
             }
         });
     }
-    private void getFeedBack() {
-        showProgressBar("Loading", "Memuat data...", true);
-        karyawanService.getMyFeedBack(userId).enqueue(new Callback<List<FeedBackModel>>() {
-            @Override
-            public void onResponse(Call<List<FeedBackModel>> call, Response<List<FeedBackModel>> response) {
-                showProgressBar("d", "d", false);
-                if (response.isSuccessful() && response.body().size() > 0) {
-                    feddBackModelList = response.body();
-                    reviewAdapter = new ReviewAdapter(getContext(), feddBackModelList);
-                    linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                    binding.rvReview.setLayoutManager(linearLayoutManager);
-                    binding.rvReview.setAdapter(reviewAdapter);
-                    binding.rvReview.setHasFixedSize(true);
-                    binding.tvEmpty.setVisibility(View.GONE);
 
+    private void getAllKaryawan() {
+        showProgressBar("Loading", "Memuat data...", true);
+        adminService.getAllKaryawan().enqueue(new Callback<List<KaryawanModel>>() {
+            @Override
+            public void onResponse(Call<List<KaryawanModel>> call, Response<List<KaryawanModel>> response) {
+                showProgressBar("s", "S", false);
+                if (response.isSuccessful() && response.body().size() > 0) {
+                    karyawanModelList = response.body();
+                    karyawanAdapter = new KaryawanAdapter(getContext(), karyawanModelList);
+                    linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                    binding.rvKaryawan.setLayoutManager(linearLayoutManager);
+                    binding.rvKaryawan.setAdapter(karyawanAdapter);
+                    binding.rvKaryawan.setHasFixedSize(true);
+                    binding.tvEmpty.setVisibility(View.GONE);
                 }else {
                     binding.tvEmpty.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<FeedBackModel>> call, Throwable t) {
-                showProgressBar("d", "d", false);
+            public void onFailure(Call<List<KaryawanModel>> call, Throwable t) {
+                showProgressBar("s", "S", false);
                 binding.tvEmpty.setVisibility(View.VISIBLE);
                 showToast("err", "Tidak ada koneksi internet");
 
+
             }
         });
-
     }
+
+    private void filter(String text) {
+        ArrayList<KaryawanModel> filteredList = new ArrayList<>();
+        for (KaryawanModel item : karyawanModelList) {
+            if (item.getNama().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+
+            karyawanAdapter.filter(filteredList);
+            if (filteredList.isEmpty()) {
+
+            }else {
+                karyawanAdapter.filter(filteredList);
+            }
+        }
+    }
+
+
     private void showProgressBar(String title, String message, boolean isLoading) {
         if (isLoading) {
             // Membuat progress dialog baru jika belum ada

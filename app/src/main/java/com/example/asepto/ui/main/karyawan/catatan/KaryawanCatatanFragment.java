@@ -1,4 +1,4 @@
-package com.example.asepto.ui.main.karyawan.review;
+package com.example.asepto.ui.main.karyawan.catatan;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
-import com.example.asepto.data.model.FeedBackModel;
+import com.example.asepto.data.model.CatatanModel;
 import com.example.asepto.data.model.KaryawanModel;
-import com.example.asepto.databinding.FragmentKaryawanReviewBinding;
-import com.example.asepto.ui.main.karyawan.adapter.review.ReviewAdapter;
+import com.example.asepto.databinding.FragmentKaryawanCatatanBinding;
+import com.example.asepto.ui.main.karyawan.adapter.catatan.CatatanAdapter;
 import com.example.asepto.util.Constans;
 
 import java.util.List;
@@ -28,15 +28,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KaryawanReviewFragment extends Fragment {
+public class KaryawanCatatanFragment extends Fragment {
 
-    private FragmentKaryawanReviewBinding binding;
-    private List<FeedBackModel> feddBackModelList;
+    private FragmentKaryawanCatatanBinding binding;
+    private List<CatatanModel> catatanModelList;
     private LinearLayoutManager linearLayoutManager;
     private KaryawanService karyawanService;
     private SharedPreferences sharedPreferences;
     private String userId;
-    private ReviewAdapter reviewAdapter;
+    private CatatanAdapter catatanAdapter;
     private AlertDialog progressDialog;
 
 
@@ -44,7 +44,7 @@ public class KaryawanReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentKaryawanReviewBinding.inflate(inflater, container, false);
+        binding = FragmentKaryawanCatatanBinding.inflate(inflater, container, false);
         sharedPreferences = getContext().getSharedPreferences(Constans.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         karyawanService = ApiConfig.getClient().create(KaryawanService.class);
         userId = sharedPreferences.getString(Constans.USER_ID, null);
@@ -55,7 +55,7 @@ public class KaryawanReviewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getFeedBack();
+        getCatatan();
         getMyProfile();
         listener();
 
@@ -95,19 +95,19 @@ public class KaryawanReviewFragment extends Fragment {
             }
         });
     }
-    private void getFeedBack() {
+    private void getCatatan() {
         showProgressBar("Loading", "Memuat data...", true);
-        karyawanService.getMyFeedBack(userId).enqueue(new Callback<List<FeedBackModel>>() {
+        karyawanService.getCatatan().enqueue(new Callback<List<CatatanModel>>() {
             @Override
-            public void onResponse(Call<List<FeedBackModel>> call, Response<List<FeedBackModel>> response) {
+            public void onResponse(Call<List<CatatanModel>> call, Response<List<CatatanModel>> response) {
                 showProgressBar("d", "d", false);
                 if (response.isSuccessful() && response.body().size() > 0) {
-                    feddBackModelList = response.body();
-                    reviewAdapter = new ReviewAdapter(getContext(), feddBackModelList);
+                    catatanModelList = response.body();
+                    catatanAdapter = new CatatanAdapter(getContext(), catatanModelList);
                     linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                    binding.rvReview.setLayoutManager(linearLayoutManager);
-                    binding.rvReview.setAdapter(reviewAdapter);
-                    binding.rvReview.setHasFixedSize(true);
+                    binding.tvCatatan.setLayoutManager(linearLayoutManager);
+                    binding.tvCatatan.setAdapter(catatanAdapter);
+                    binding.tvCatatan.setHasFixedSize(true);
                     binding.tvEmpty.setVisibility(View.GONE);
 
                 }else {
@@ -116,7 +116,7 @@ public class KaryawanReviewFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<FeedBackModel>> call, Throwable t) {
+            public void onFailure(Call<List<CatatanModel>> call, Throwable t) {
                 showProgressBar("d", "d", false);
                 binding.tvEmpty.setVisibility(View.VISIBLE);
                 showToast("err", "Tidak ada koneksi internet");

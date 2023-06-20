@@ -12,4 +12,8 @@
         <item name="android:textColor">@color/blue</item>
         <!-- Anda juga dapat menambahkan atribut lain untuk mengkustomisasi judul -->
     </style>
+
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/font_color</item>
+    </style>
 </resources>
