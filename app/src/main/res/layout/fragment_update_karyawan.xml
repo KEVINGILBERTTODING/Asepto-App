@@ -39,6 +39,15 @@
                     android:fontFamily="@font/popsem"
                     android:textColor="@color/font_color"/>
 
+                <ImageButton
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:backgroundTint="@color/font_color"
+                    android:id="@+id/btnDelete"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ic_trash"/>
+
+
 
 
 

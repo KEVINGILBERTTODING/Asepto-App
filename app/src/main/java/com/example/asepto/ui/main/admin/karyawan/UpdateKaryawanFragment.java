@@ -1,6 +1,7 @@
 package com.example.asepto.ui.main.admin.karyawan;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 import com.example.asepto.R;
 import com.example.asepto.data.api.AdminService;
@@ -127,6 +129,12 @@ public class UpdateKaryawanFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
+        binding.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete();
+            }
+        });
     }
 
     private void update() {
@@ -163,6 +171,57 @@ public class UpdateKaryawanFragment extends Fragment {
             }
         });
     }
+
+    private void delete() {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.layout_alert_delete);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        Button btnOke, btnBatal;
+        btnOke = dialog.findViewById(R.id.btnOke);
+        btnBatal = dialog.findViewById(R.id.btnBatal);
+        dialog.show();
+        btnOke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProgressBar("Loading", "Menyimpan data...", true);
+                adminService.deleteKaryawan(
+                        pegawaiId
+                ).enqueue(new Callback<ResponseModel>() {
+                    @Override
+                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                        showProgressBar("ds", "d", false);
+                        if (response.isSuccessful() && response.body().getCode() == 200) {
+                            showToast("success", "Berhasil menghapus data");
+                            getActivity().onBackPressed();
+                            dialog.dismiss();
+                        }else {
+                            showToast("err", "Terjadi kesalahan");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseModel> call, Throwable t) {
+                        showProgressBar("ds", "d", false);
+                        showToast("err", "Tidak ada koneksi internet");
+
+
+
+                    }
+                });
+
+            }
+        });
+
+        btnBatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
 
     private void showProgressBar(String title, String message, boolean isLoading) {
         if (isLoading) {

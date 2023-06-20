@@ -34,4 +34,13 @@ public interface AdminService {
             @Field("bank") String bank,
             @Field("jeniskel") String jeniskel
     );
+
+    @FormUrlEncoded
+    @POST("admin/deleteKaryawan")
+    Call<ResponseModel> deleteKaryawan(
+            @Field("id") String id
+    );
+
+
+
 }
