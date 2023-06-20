@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/bottom_bar"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/add_square"
+                        android:id="@+id/ivIconAction"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:visibility="gone"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/minus_squar"
+                        android:id="@+id/ivIconAction2"/>
+
+                </RelativeLayout>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@id/rlAction"
+                    android:text="Asepto App"
+                    android:id="@+id/tvNamaProject"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/font_color"/>
+
+
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/black4"
+                android:id="@+id/layoutDetail"
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:text="To:"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:text="Azhar Fani"
+                    android:id="@+id/tvNamaPegawai"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/font_color"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:text="Bagus Designnya"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:id="@+id/tvReview"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/font_color"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

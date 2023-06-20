@@ -1,5 +1,6 @@
 package com.example.asepto.data.api;
 
+import com.example.asepto.data.model.FeddBackModel;
 import com.example.asepto.data.model.KaryawanModel;
 import com.example.asepto.data.model.ProgressModel;
 import com.example.asepto.data.model.ProjectModel;
@@ -55,5 +56,10 @@ public interface KaryawanService {
     @POST("karyawan/getDeadlineProject")
     Call<ResponseModel> getDeadLineProject(
             @Field("id") String id
+    );
+
+    @GET("karyawan/getfeedback")
+    Call<List<FeddBackModel>> getMyFeedBack(
+            @Query("id") String id
     );
 }

@@ -29,29 +29,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/btnBack"
-                    android:text="Daftar Progress"
+                    android:text="Daftar Review"
                     android:id="@+id/tv1"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:textSize="@dimen/_15ssp"
                     android:fontFamily="@font/popsem"
                     android:textColor="@color/font_color"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/btnBack"
-                    android:text="Nama Project"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:textSize="@dimen/_10ssp"
-                    android:id="@+id/tvNamaProject"
-                    android:layout_below="@id/tv1"
-                    android:fontFamily="@font/popmed"
-                    android:textColor="@color/font_color"/>
             </RelativeLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProgress"
+            android:id="@+id/rvReview"
             android:layout_below="@id/appBar"
             android:layout_marginTop="@dimen/_20sdp"
             tools:listitem="@layout/list_project"
@@ -69,15 +58,6 @@
             android:fontFamily="@font/popsem"
             android:textColor="@color/font_color"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:backgroundTint="@color/bottom_bar"
-            android:id="@+id/btnAdd"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/baseline_add_24"
-            android:layout_alignParentRight="true"
-            app:tint="@color/blue"/>
 
 
     </RelativeLayout>

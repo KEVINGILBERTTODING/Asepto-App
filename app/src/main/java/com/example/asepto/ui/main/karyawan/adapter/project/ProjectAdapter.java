@@ -41,9 +41,9 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProjectAdapter.ViewHolder holder, int position) {
-        holder.tvnNamaPerusahaan.setText(projectModelList.get(holder.getAdapterPosition()).getNamaPerusahaan());
+        holder.tvnNamaProject.setText(projectModelList.get(holder.getAdapterPosition()).getNamaProject());
         holder.tvEmail.setText(projectModelList.get(holder.getAdapterPosition()).getEmailPerusahaan());
-        holder.tvProjectScope.setText(projectModelList.get(holder.getAdapterPosition()).getNamaProject());
+        holder.tvProjectScope.setText(projectModelList.get(holder.getAdapterPosition()).getKategori());
         holder.tvTgllMulai.setText(projectModelList.get(holder.getAdapterPosition()).getTglMulai());
         holder.tvTglSelesai.setText(projectModelList.get(holder.getAdapterPosition()).getTglSelesai());
         holder.tvDeskripsi.setText(projectModelList.get(holder.getAdapterPosition()).getDeskripsiProject());
@@ -78,7 +78,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder  {
         ImageView ivAction, ivAction2;
-        TextView tvnNamaPerusahaan, tvEmail, tvProjectScope, tvTgllMulai,
+        TextView tvnNamaProject, tvEmail, tvProjectScope, tvTgllMulai,
         tvTglSelesai, tvDeskripsi;
         LinearLayout lrDetail;
         Button btnProgress;
@@ -87,7 +87,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             super(itemView);
             ivAction = itemView.findViewById(R.id.ivIconAction);
             ivAction2 = itemView.findViewById(R.id.ivIconAction2);
-            tvnNamaPerusahaan = itemView.findViewById(R.id.tvNamaPerusahaan);
+            tvnNamaProject = itemView.findViewById(R.id.tvNamaProject);
             tvEmail = itemView.findViewById(R.id.tvEmailPerusahaan);
             tvProjectScope = itemView.findViewById(R.id.tvProjectScope);
             tvTgllMulai = itemView.findViewById(R.id.tvTglMulai);

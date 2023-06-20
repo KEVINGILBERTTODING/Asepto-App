@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.asepto.R;
 import com.example.asepto.ui.main.karyawan.home.KaryawanHomeFragment;
+import com.example.asepto.ui.main.karyawan.review.KaryawanReviewFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -31,6 +32,9 @@ public class KaryawanMainActivty extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menuHome) {
                     replace(new KaryawanHomeFragment());
+                    return true;
+                }else if (item.getItemId() == R.id.menuReview) {
+                    replace(new KaryawanReviewFragment());
                     return true;
                 }
                 return false;

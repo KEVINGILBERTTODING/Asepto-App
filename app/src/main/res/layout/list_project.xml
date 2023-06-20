@@ -52,7 +52,7 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_toRightOf="@id/rlAction"
                     android:text="Keitoto"
-                    android:id="@+id/tvNamaPerusahaan"
+                    android:id="@+id/tvNamaProject"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
                     android:textColor="@color/font_color"/>
@@ -65,8 +65,8 @@
                 android:layout_width="match_parent"
                 android:background="@color/black4"
                 android:id="@+id/layoutDetail"
-                android:visibility="gone"
                 android:padding="@dimen/_10sdp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical">
