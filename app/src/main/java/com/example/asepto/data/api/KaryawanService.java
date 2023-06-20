@@ -50,4 +50,10 @@ public interface KaryawanService {
     Call<KaryawanModel> getMyProfile(
             @Query("id") String id
     );
+
+    @FormUrlEncoded
+    @POST("karyawan/getDeadlineProject")
+    Call<ResponseModel> getDeadLineProject(
+            @Field("id") String id
+    );
 }

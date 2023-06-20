@@ -104,6 +104,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
                     Bundle bundle = new Bundle();
                     bundle.putString("nama_project", projectModelList.get(getAdapterPosition()).getNamaProject());
                     bundle.putString("project_id", projectModelList.get(getAdapterPosition()).getProjectId());
+                    bundle.putInt("status", Integer.parseInt(projectModelList.get(getAdapterPosition()).getStatus()));
                     fragment.setArguments(bundle);
                     ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.frameKaryawn, fragment).addToBackStack(null)

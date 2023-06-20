@@ -48,6 +48,7 @@ public class KaryawanProgressFragment extends Fragment {
     private KaryawanService karyawanService;
     private SharedPreferences sharedPreferences;
     private String userId, namaProject, projectId, jabatan;
+    private Integer status;
     private ProgressAdapter progressAdapter;
     private AlertDialog progressDialog;
 
@@ -62,6 +63,16 @@ public class KaryawanProgressFragment extends Fragment {
         userId = sharedPreferences.getString(Constans.USER_ID, null);
         namaProject = getArguments().getString("nama_project");
         projectId = getArguments().getString("project_id");
+        status = getArguments().getInt("status");
+
+
+        // MENYEMBUNYIKAN BUTTON ADD
+        // PROJECT TELAH SELESAI
+        if (status == 1) {
+            binding.btnAdd.setVisibility(View.GONE);
+        } else {
+            binding.btnAdd.setVisibility(View.VISIBLE);
+        }
 
 
         return binding.getRoot();
@@ -75,7 +86,12 @@ public class KaryawanProgressFragment extends Fragment {
         getProgress();
         getMyProfile();
         listener();
+        checkDeadLineProject();
+
     }
+
+
+
 
     private void listener() {
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +108,6 @@ public class KaryawanProgressFragment extends Fragment {
             }
         });
     }
-
     private void addProgress() {
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.layout_add_progress);
@@ -181,7 +196,6 @@ public class KaryawanProgressFragment extends Fragment {
             }
         });
     }
-
     private void getMyProfile() {
         showProgressBar("Loading", "Memuat data...", true);
         karyawanService.getMyProfile(userId).enqueue(new Callback<KaryawanModel>() {
@@ -206,7 +220,6 @@ public class KaryawanProgressFragment extends Fragment {
             }
         });
     }
-
     private void getProgress() {
         showProgressBar("Loading", "Memuat data...", true);
         karyawanService.getProgressById(userId, projectId).enqueue(new Callback<List<ProgressModel>>() {
@@ -237,7 +250,6 @@ public class KaryawanProgressFragment extends Fragment {
         });
 
     }
-
     private void showProgressBar(String title, String message, boolean isLoading) {
         if (isLoading) {
             // Membuat progress dialog baru jika belum ada
@@ -256,13 +268,45 @@ public class KaryawanProgressFragment extends Fragment {
             }
         }
     }
-
     private void showToast(String jenis, String text) {
         if (jenis.equals("success")) {
             Toasty.success(getContext(), text, Toasty.LENGTH_SHORT).show();
         }else {
             Toasty.error(getContext(), text, Toasty.LENGTH_SHORT).show();
         }
+    }
+
+    private void checkDeadLineProject(){
+        showProgressBar("Loading", "Memuat data...", true);
+        karyawanService.getDeadLineProject(projectId).enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                showProgressBar("ds", "ds", false);
+                if (response.isSuccessful() && response.body().getCode() == 200) {
+                    Dialog dialog = new Dialog(getContext());
+                    dialog.setContentView(R.layout.layout_alert_deadline);
+                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    Button btnOke = dialog.findViewById(R.id.btnOke);
+
+                    dialog.show();
+
+                    btnOke.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                showToast("err", "Tidak ada koneksi internet");
+
+            }
+        });
     }
 
 }
