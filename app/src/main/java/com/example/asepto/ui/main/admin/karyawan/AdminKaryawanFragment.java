@@ -78,6 +78,15 @@ public class AdminKaryawanFragment extends Fragment {
             }
         });
 
+        binding.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameAdmin, new InsertKaryawanFragment())
+                        .addToBackStack(null).commit();
+            }
+        });
+
 
     }
 

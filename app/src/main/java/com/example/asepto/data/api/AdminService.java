@@ -41,6 +41,20 @@ public interface AdminService {
             @Field("id") String id
     );
 
+    @FormUrlEncoded
+    @POST("admin/insertKaryawan")
+    Call<ResponseModel> insertKaryawan(
+            @Field("nama") String nama,
+            @Field("email") String email,
+            @Field("jabatan") String jabatan,
+            @Field("telp") String telp,
+            @Field("norekening") String norekening,
+            @Field("bank") String bank,
+            @Field("jeniskel") String jeniskel
+    );
+
+
+
 
 
 }
