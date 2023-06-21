@@ -91,6 +91,19 @@ public interface AdminService {
             @Field("tanggal_event") String tglEvent
     );
 
+    @FormUrlEncoded
+    @POST("admin/deleteCatatan")
+    Call<ResponseModel> deleteCatatan(
+            @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST("admin/insertCatatan")
+    Call<ResponseModel> insertCatatan(
+            @Field("catatan") String catatan,
+            @Field("tanggal") String tanggal
+    );
+
 
 
 

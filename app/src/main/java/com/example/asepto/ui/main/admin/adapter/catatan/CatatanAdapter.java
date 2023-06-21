@@ -2,6 +2,7 @@ package com.example.asepto.ui.main.admin.adapter.catatan;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,7 +109,6 @@ public class CatatanAdapter extends RecyclerView.Adapter<CatatanAdapter.ViewHold
             btnSimpan = itemView.findViewById(R.id.btnSimpan);
             btnUbah = itemView.findViewById(R.id.btnUbah);
             adminService = ApiConfig.getClient().create(AdminService.class);
-
             btnUbah.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -118,7 +118,6 @@ public class CatatanAdapter extends RecyclerView.Adapter<CatatanAdapter.ViewHold
                     lrTglEvent.setVisibility(View.VISIBLE);
                 }
             });
-
             tvTglEvent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -148,8 +147,6 @@ public class CatatanAdapter extends RecyclerView.Adapter<CatatanAdapter.ViewHold
                     datePickerDialog.show();
                 }
             });
-
-
             btnSimpan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -189,6 +186,56 @@ public class CatatanAdapter extends RecyclerView.Adapter<CatatanAdapter.ViewHold
 
                 }
             });
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dialog dialog = new Dialog(context);
+                    dialog.setContentView(R.layout.layout_alert_delete);
+                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    Button btnOke, btnBatal;
+                    btnOke = dialog.findViewById(R.id.btnOke);
+                    btnBatal = dialog.findViewById(R.id.btnBatal);
+                    dialog.show();
+                    btnBatal.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    btnOke.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showProgressBar("Loading", "Menghapus data...", true);
+                            adminService.deleteCatatan(catatanModelList.get(getAdapterPosition()).getCatatanId())
+                                    .enqueue(new Callback<ResponseModel>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                            showProgressBar("s", "s", false);
+                                            if (response.isSuccessful() && response.body().getCode() == 200) {
+                                                showToast("success", "Berhasil menghapus data");
+                                                catatanModelList.remove(getAdapterPosition());
+                                                notifyDataSetChanged();
+                                                dialog.dismiss();
+                                            }else {
+                                                showToast("err", "Terjadi kesalahan");
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                            showProgressBar("s", "s", false);
+                                            showToast("err", "Tidak ada koneksi internet");
+
+
+
+                                        }
+                                    });
+                        }
+                    });
+                }
+            });
+
+
         }
     }
 
