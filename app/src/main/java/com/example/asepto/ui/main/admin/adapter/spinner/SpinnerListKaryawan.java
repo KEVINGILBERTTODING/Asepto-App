@@ -40,6 +40,11 @@ public class SpinnerListKaryawan extends ArrayAdapter<KaryawanModel> {
     }
 
 
+    public String getNamaKaryawan(int position) {
+       return getItem(position).getNama();
+    }
+
+
 
 
 

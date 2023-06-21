@@ -1,32 +1,32 @@
-package com.example.asepto.ui.main.admin.home;
+package com.example.asepto.ui.main.admin.project;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.asepto.R;
 import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
+import com.example.asepto.data.model.FeedBackModel;
+import com.example.asepto.data.model.KaryawanModel;
 import com.example.asepto.data.model.ProjectModel;
-import com.example.asepto.databinding.FragmentAdminHomeBinding;
-import com.example.asepto.ui.main.admin.project.AdminProjectFragment;
-import com.example.asepto.ui.main.auth.LoginActivity;
-import com.example.asepto.ui.main.karyawan.project.KaryawanProjectFragment;
+import com.example.asepto.databinding.FragmentAdminProjectBinding;
+import com.example.asepto.databinding.FragmentKaryawanProjectBinding;
+import com.example.asepto.ui.main.admin.adapter.project.ProjectAdapter;
 import com.example.asepto.util.Constans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -34,12 +34,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdminHomeFragment extends Fragment {
-    private FragmentAdminHomeBinding binding;
+public class AdminProjectFragment extends Fragment {
+
+    private FragmentAdminProjectBinding binding;
+    private List<ProjectModel> projectModelList;
+    private LinearLayoutManager linearLayoutManager;
     private AdminService adminService;
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private String userId;
+    private String userId, status;
+    private ProjectAdapter projectAdapter;
     private AlertDialog progressDialog;
 
 
@@ -47,11 +50,18 @@ public class AdminHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentAdminHomeBinding.inflate(inflater, container, false);
+        binding = FragmentAdminProjectBinding.inflate(inflater, container, false);
         sharedPreferences = getContext().getSharedPreferences(Constans.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        userId = sharedPreferences.getString(Constans.USER_ID, null);
-        editor = sharedPreferences.edit();
         adminService = ApiConfig.getClient().create(AdminService.class);
+        userId = sharedPreferences.getString(Constans.USER_ID, null);
+        status = getArguments().getString("status_id");
+
+        if (status.equals("1")) {
+            binding.btnAdd.setVisibility(View.GONE);
+        }
+
+
+
 
         return binding.getRoot();
     }
@@ -59,84 +69,94 @@ public class AdminHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getTotalProject("all", binding.tvTotalProject);
-        getTotalProject("1", binding.tvTotalProjectSelesai);
-        getTotalProject("0", binding.tvTotalProjectSedangBerjalan);
+        getProject(status);
+
         listener();
     }
 
-    private void listener() {
-        binding.cvProjectSelesai.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                replace("1");
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
-        });
 
-        binding.cvTotalProject.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                replace("all");
-            }
-        });
-        binding.cvTotalProjectSedangBerjalan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replace("0");
-            }
-        });
-
-        binding.btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.layout_alert_log_out);
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                Button btnYa, btnTidak;
-                btnYa = dialog.findViewById(R.id.btnOke);
-                btnTidak = dialog.findViewById(R.id.btnBatal);
-                dialog.show();
-
-                btnYa.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        logOut();
-                        dialog.dismiss();
-                    }
-                });
-                btnTidak.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
             }
         });
     }
 
-    private void getTotalProject(String status, TextView tvTotal) {
+    private void listener() {
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+        binding.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameAdmin, new InsertProjectFragment())
+                        .addToBackStack(null).commit();
+            }
+        });
+
+    }
+
+    private void getProject(String status) {
         showProgressBar("Loading", "Memuat data...", true);
         adminService.getAllProject(status).enqueue(new Callback<List<ProjectModel>>() {
             @Override
             public void onResponse(Call<List<ProjectModel>> call, Response<List<ProjectModel>> response) {
                 showProgressBar("d", "d", false);
                 if (response.isSuccessful() && response.body().size() > 0) {
-                    tvTotal.setText(String.valueOf(response.body().size()));
+                    projectModelList = response.body();
+                    projectAdapter = new ProjectAdapter(getContext(), projectModelList);
+                    linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                    binding.rvProject.setLayoutManager(linearLayoutManager);
+                    binding.rvProject.setAdapter(projectAdapter);
+                    binding.rvProject.setHasFixedSize(true);
+                    binding.tvEmpty.setVisibility(View.GONE);
+
                 }else {
-                    tvTotal.setText("0");
+                    binding.tvEmpty.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<List<ProjectModel>> call, Throwable t) {
                 showProgressBar("d", "d", false);
+                binding.tvEmpty.setVisibility(View.VISIBLE);
                 showToast("err", "Tidak ada koneksi internet");
-
 
             }
         });
 
     }
+
+    private void filter(String text) {
+        ArrayList<ProjectModel> filteredList = new ArrayList<>();
+        for (ProjectModel item : projectModelList) {
+            if (item.getNamaProject().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+            projectAdapter.filter(filteredList);
+            if (filteredList.isEmpty()) {
+
+            }else {
+                projectAdapter.filter(filteredList);
+            }
+        }
+    }
+
+
 
 
     private void showProgressBar(String title, String message, boolean isLoading) {
@@ -157,6 +177,7 @@ public class AdminHomeFragment extends Fragment {
             }
         }
     }
+
     private void showToast(String jenis, String text) {
         if (jenis.equals("success")) {
             Toasty.success(getContext(), text, Toasty.LENGTH_SHORT).show();
@@ -165,21 +186,4 @@ public class AdminHomeFragment extends Fragment {
         }
     }
 
-    private void replace(String status){
-        Fragment fr = new AdminProjectFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("status_id", status);
-        fr.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameAdmin, fr).addToBackStack(null)
-                .commit();
-
-    }
-
-    private void logOut() {
-        editor.clear().apply();
-        startActivity(new Intent(getContext(), LoginActivity.class));
-        getActivity().finish();
-
-    }
 }

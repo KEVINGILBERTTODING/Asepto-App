@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/bottom_bar"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/bottom_bar">
+
+                <RelativeLayout
+                    android:id="@+id/rlAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/add_square"
+                        android:id="@+id/ivIconAction"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:visibility="gone"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/minus_squar"
+                        android:id="@+id/ivIconAction2"/>
+
+                </RelativeLayout>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@id/rlAction"
+                    android:text="Keitoto"
+                    android:layout_toLeftOf="@id/lrMenuAction"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:id="@+id/tvNamaProject"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/font_color"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lrMenuAction"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/btnEdit"
+                        android:background="@drawable/ic_edit"/>
+
+                    <ImageButton
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:id="@+id/btnDelete"
+                        android:background="@drawable/ic_trash2"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/black4"
+                android:id="@+id/layoutDetail"
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email Perusahaan"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/font_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="keitoto@gmail.com"
+                    android:id="@+id/tvEmailPerusahaan"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Project Scope"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/font_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desig UI Ux"
+                    android:id="@+id/tvProjectScope"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deadline"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/font_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2023-02-02"
+                        android:id="@+id/tvTglMulai"
+                        android:fontFamily="@font/popmed"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_9ssp"
+                        android:textColor="@color/font_color"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="s/d"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:fontFamily="@font/popmed"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_9ssp"
+                        android:textColor="@color/font_color"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2023-02-02"
+                        android:id="@+id/tvTglSelesai"
+                        android:fontFamily="@font/popmed"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_9ssp"
+                        android:textColor="@color/font_color"/>
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/font_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desig UI Ux"
+                    android:id="@+id/tvDeskripsi"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Progress"
+                    app:cornerRadius="@dimen/_10sdp"
+                    android:id="@+id/btnProgress"
+                    android:backgroundTint="@color/blue"
+                    android:textSize="@dimen/_9ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_gravity="end"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

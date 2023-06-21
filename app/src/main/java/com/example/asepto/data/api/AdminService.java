@@ -104,6 +104,22 @@ public interface AdminService {
             @Field("tanggal") String tanggal
     );
 
+    @FormUrlEncoded
+    @POST("admin/insertProject")
+    Call<ResponseModel> insertProject(
+            @Field("nama_project") String nama_project,
+            @Field("deskripsi_project") String deskripsi_project,
+            @Field("kategori") String kategori,
+            @Field("tgl_mulai") String tgl_mulai,
+            @Field("tgl_selesai") String tgl_selesai,
+            @Field("nama_perusahaan") String nama_perusahaan,
+            @Field("email_perusahaan") String email_perusahaan,
+            @Field("budget") String budget,
+            @Field("karyawan_id") String karyawan_id,
+            @Field("nama") String nama
+    );
+
+
 
 
 

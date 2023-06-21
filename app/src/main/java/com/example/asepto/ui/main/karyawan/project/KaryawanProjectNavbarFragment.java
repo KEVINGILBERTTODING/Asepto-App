@@ -131,14 +131,5 @@ public class KaryawanProjectNavbarFragment extends Fragment {
         }
     }
 
-    private void replace(String status){
-        Fragment fr = new KaryawanProjectNavbarFragment();
-        Bundle bundle = new Bundle();
-        bundle.getString("status", status);
-        fr.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameKaryawn, fr).addToBackStack(null)
-                .commit();
 
-    }
 }

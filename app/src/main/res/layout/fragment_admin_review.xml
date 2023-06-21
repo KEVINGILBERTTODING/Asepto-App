@@ -77,7 +77,7 @@
             android:layout_alignParentBottom="true"
             android:src="@drawable/baseline_add_24"
             android:layout_alignParentRight="true"
-            app:tint="@color/blue"/>
+            app:tint="@color/white"/>
 
 
 
