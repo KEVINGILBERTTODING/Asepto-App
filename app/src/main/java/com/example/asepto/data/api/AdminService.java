@@ -59,6 +59,21 @@ public interface AdminService {
     Call<List<FeedBackModel>> getAllReview();
 
 
+    @FormUrlEncoded
+    @POST("admin/updateFeedBack")
+    Call<ResponseModel> updateFeedBack(
+            @Field("id") String id,
+            @Field("feedback") String feedback
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("admin/deleteReview")
+    Call<ResponseModel> deleteReview(
+            @Field("id") String id
+    );
+
 
 
 
