@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:background="@color/background"
+        android:padding="@dimen/_10sdp"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.karyawan.project.KaryawanProjectFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:id="@+id/appBar"
+            android:background="@color/background"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:backgroundTint="@color/font_color"
+                    android:id="@+id/btnBack"
+                    android:visibility="gone"
+                    android:background="@drawable/baseline_arrow_back_ios_24"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btnBack"
+                    android:text="Daftar Catatan"
+                    android:id="@+id/tv1"
+                    android:textSize="@dimen/_15ssp"
+                    android:fontFamily="@font/popsem"
+                    android:textColor="@color/font_color"/>
+
+            </RelativeLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCatatan"
+            android:layout_below="@id/appBar"
+            android:layout_marginTop="@dimen/_20sdp"
+            tools:listitem="@layout/list_project"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tidak ada data."
+            android:id="@+id/tvEmpty"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="gone"
+            android:fontFamily="@font/popsem"
+            android:textColor="@color/font_color"/>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/bottom_bar"
+            android:id="@+id/btnAdd"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/baseline_add_24"
+            android:layout_alignParentRight="true"
+            app:tint="@color/blue"/>
+
+
+
+
+    </RelativeLayout>
+
+</layout>

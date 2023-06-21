@@ -83,6 +83,14 @@ public interface AdminService {
             @Field("feedback") String feedback
     );
 
+    @FormUrlEncoded
+    @POST("admin/updateCatatan")
+    Call<ResponseModel> updateCatatan(
+            @Field("id") String id,
+            @Field("catatan") String catatan,
+            @Field("tanggal_event") String tglEvent
+    );
+
 
 
 

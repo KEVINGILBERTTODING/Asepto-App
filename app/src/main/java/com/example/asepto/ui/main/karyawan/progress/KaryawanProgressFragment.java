@@ -250,6 +250,7 @@ public class KaryawanProgressFragment extends Fragment {
         });
 
     }
+
     private void showProgressBar(String title, String message, boolean isLoading) {
         if (isLoading) {
             // Membuat progress dialog baru jika belum ada

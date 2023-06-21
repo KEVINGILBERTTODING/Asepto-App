@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/bottom_bar"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/add_square"
+                        android:id="@+id/ivIconAction"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:visibility="gone"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/minus_squar"
+                        android:id="@+id/ivIconAction2"/>
+
+                </RelativeLayout>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@id/rlAction"
+                    android:text="2023-02-02"
+                    android:id="@+id/tvDate"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_11ssp"
+                    android:textColor="@color/font_color"/>
+
+
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/black4"
+                android:id="@+id/layoutDetail"
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/lrTglEvent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:text="Tanggal"
+                        android:id="@+id/tvTanggal"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_9ssp"
+                        android:textColor="@color/font_color"/>
+
+                    <TextView
+                        android:background="@drawable/edittext_layout"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Pilih tanggal"
+                        android:textColorHint="@color/font_color"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:id="@+id/tvTglEvent"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_9ssp"
+                        android:textColor="@color/font_color"/>
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:text="Catatan"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:hint="Tulis sesuatu..."
+                    android:textColorHint="@color/font_color"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/edittext_layout"
+                    android:id="@+id/etCatatan"
+                    android:lines="4"
+                    android:enabled="false"
+                    android:gravity="start"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/font_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hapus"
+                        android:id="@+id/btnDelete"
+                        app:backgroundTint="@color/red"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Simpan"
+                        android:visibility="gone"
+                        android:id="@+id/btnSimpan"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        app:backgroundTint="@color/blue"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ubah"
+                        android:id="@+id/btnUbah"
+                        android:layout_marginLeft="@dimen/_10sdp"
+
+
+                        app:backgroundTint="@color/yellow"/>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

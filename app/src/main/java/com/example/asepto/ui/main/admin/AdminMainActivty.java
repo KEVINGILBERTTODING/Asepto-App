@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.asepto.R;
 import com.example.asepto.ui.main.admin.Review.AdminReviewFragment;
+import com.example.asepto.ui.main.admin.catatan.AdminCatatanFragment;
 import com.example.asepto.ui.main.admin.home.AdminHomeFragment;
 import com.example.asepto.ui.main.admin.karyawan.AdminKaryawanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,6 +39,9 @@ public class AdminMainActivty extends AppCompatActivity {
                     return true;
                 }else if (item.getItemId() == R.id.menuReview) {
                     replace(new AdminReviewFragment());
+                    return true;
+                }else if (item.getItemId() == R.id.menuTambahan) {
+                    replace(new AdminCatatanFragment());
                     return true;
                 }
                 return false;
