@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.asepto.R;
+import com.example.asepto.ui.main.admin.Review.AdminReviewFragment;
 import com.example.asepto.ui.main.admin.home.AdminHomeFragment;
 import com.example.asepto.ui.main.admin.karyawan.AdminKaryawanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,6 +35,9 @@ public class AdminMainActivty extends AppCompatActivity {
                     return true;
                 }else if (item.getItemId() == R.id.menuKaryawan) {
                     replace(new AdminKaryawanFragment());
+                    return true;
+                }else if (item.getItemId() == R.id.menuReview) {
+                    replace(new AdminReviewFragment());
                     return true;
                 }
                 return false;

@@ -1,5 +1,6 @@
 package com.example.asepto.data.api;
 
+import com.example.asepto.data.model.FeedBackModel;
 import com.example.asepto.data.model.KaryawanModel;
 import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
@@ -52,6 +53,10 @@ public interface AdminService {
             @Field("bank") String bank,
             @Field("jeniskel") String jeniskel
     );
+
+
+    @GET("admin/getAllFeedBack")
+    Call<List<FeedBackModel>> getAllReview();
 
 
 
