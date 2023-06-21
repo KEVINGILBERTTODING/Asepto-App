@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/bottom_bar"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:text="Asepto App"
+                        android:id="@+id/tvProjectName"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_11ssp"
+                        android:textColor="@color/font_color"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:text="Asepto App"
+                        android:id="@+id/tvEmail"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_9ssp"
+                        android:textColor="@color/blue"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pilih"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:id="@+id/btnPilih"
+                        app:backgroundTint="@color/blue"
+                        android:layout_gravity="end"/>
+
+
+
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

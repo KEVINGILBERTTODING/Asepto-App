@@ -74,6 +74,17 @@ public interface AdminService {
             @Field("id") String id
     );
 
+    @FormUrlEncoded
+    @POST("admin/addReview")
+    Call<ResponseModel> insertReview(
+            @Field("project_id") String project_id,
+            @Field("karyawan_id") String karyawan_id,
+            @Field("nama_project") String nama_project,
+            @Field("feedback") String feedback
+    );
+
+
+
 
 
 
