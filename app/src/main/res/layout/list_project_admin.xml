@@ -216,16 +216,37 @@
                     android:textSize="@dimen/_9ssp"
                     android:textColor="@color/font_color"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Progress"
-                    app:cornerRadius="@dimen/_10sdp"
-                    android:id="@+id/btnProgress"
-                    android:backgroundTint="@color/blue"
-                    android:textSize="@dimen/_9ssp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_gravity="end"/>
+                    android:orientation="horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Progress"
+                        app:cornerRadius="@dimen/_10sdp"
+                        android:id="@+id/btnProgress"
+                        android:backgroundTint="@color/yellow"
+                        android:textSize="@dimen/_9ssp"
+                        android:layout_gravity="end"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selesai"
+                        app:cornerRadius="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:id="@+id/btnFinish"
+                        android:backgroundTint="@color/blue"
+                        android:textSize="@dimen/_9ssp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_gravity="end"/>
+                </LinearLayout>
+
+
 
             </LinearLayout>
 

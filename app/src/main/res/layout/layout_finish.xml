@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/bottom_bar"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black2">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:text="Project Selesai"
+                    android:id="@+id/tvProgress"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/font_color"/>
+
+                <ImageButton
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:background="@drawable/ic_times"
+                    android:id="@+id/btnClose"
+                    android:layout_alignParentRight="true"/>
+
+
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/bottom_bar"
+                android:id="@+id/layoutDetail"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/bottom_bar"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/black3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Upload evidence untuk menyelesaikan project"
+
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/rlFile"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Evidence"
+                        android:id="@+id/tv2"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_9ssp"
+                        android:textColor="@color/font_color"/>
+                    <ImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:id="@+id/ivProject"
+                        android:layout_below="@id/tv2"
+                        android:visibility="gone"
+                        android:src="@drawable/main_icon"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_below="@id/ivProject"
+                        android:orientation="horizontal">
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pilih"
+                            app:backgroundTint="@color/yellow"
+                            android:id="@+id/btnFilePicker"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:maxLength="30"
+                            android:enabled="false"
+                            android:textColor="@color/font_color"
+                            android:textSize="@dimen/_9ssp"
+                            android:id="@+id/etFilePath"/>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+
+
+
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Simpan"
+                    app:cornerRadius="@dimen/_10sdp"
+                    android:id="@+id/btnSimpan"
+                    android:backgroundTint="@color/blue"
+                    android:textSize="@dimen/_9ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_gravity="end"/>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
