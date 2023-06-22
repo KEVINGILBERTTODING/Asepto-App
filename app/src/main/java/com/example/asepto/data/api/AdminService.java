@@ -6,12 +6,18 @@ import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
 
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 public interface AdminService {
@@ -140,6 +146,13 @@ public interface AdminService {
     Call<ResponseModel> deleteProject(
             @Field("id") String id
     );
+
+    @Multipart
+    @POST("admin/projectDone")
+    Call<ResponseModel> finishProject(
+            @PartMap Map<String, RequestBody> textData,
+            @Part MultipartBody.Part partFile
+            );
 
 
 

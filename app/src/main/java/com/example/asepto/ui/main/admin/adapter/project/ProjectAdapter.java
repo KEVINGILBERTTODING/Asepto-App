@@ -1,13 +1,20 @@
 package com.example.asepto.ui.main.admin.adapter.project;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,9 +32,15 @@ import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
+import com.example.asepto.ui.main.admin.project.ProjectFinishFragment;
 import com.example.asepto.ui.main.admin.project.UpdateProjectFragment;
 import com.example.asepto.ui.main.karyawan.progress.KaryawanProgressFragment;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +54,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     List<ProjectModel> projectModelList;
     private AlertDialog progressDialog;
     private AdminService adminService;
+
 
     public ProjectAdapter(Context context, List<ProjectModel> projectModelList) {
         this.context = context;
@@ -215,9 +230,26 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
                 }
             });
+            btnSelesai.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragment = new ProjectFinishFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", projectModelList.get(getAdapterPosition()).getId());
+                    fragment.setArguments(bundle);
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frameAdmin, fragment).addToBackStack(null)
+                            .commit();
+
+
+
+
+                }
+            });
         }
 
     }
+
 
 
 

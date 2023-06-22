@@ -7,43 +7,47 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
-        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
         app:cardBackgroundColor="@color/bottom_bar"
         android:layout_height="wrap_content">
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:padding="@dimen/_10sdp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_20sdp"
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/sad_animation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/black2">
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/warning_anim" />
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Peringatan!"
+                android:fontFamily="@font/popsem"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textColor="@color/font_color"
+                android:textSize="@dimen/_13sdp"
+                android:layout_height="wrap_content"/>
 
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_height="wrap_content"
-                    android:text="Project Selesai"
-                    android:id="@+id/tvProgress"
-                    android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/font_color"/>
-
-                <ImageButton
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:background="@drawable/ic_times"
-                    android:id="@+id/btnClose"
-                    android:layout_alignParentRight="true"/>
-
-
-
-            </RelativeLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/tvMessageAlert"
+                android:text="Apakah anda yakin ingin menyelesaikan project ini?"
+                android:fontFamily="@font/popmed"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/font_color"
+                android:textSize="@dimen/_9sdp"
+                android:layout_height="wrap_content"/>
 
 
             <LinearLayout
@@ -125,22 +129,44 @@
                 </RelativeLayout>
 
 
-
-
-
-
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Simpan"
-                    app:cornerRadius="@dimen/_10sdp"
-                    android:id="@+id/btnSimpan"
-                    android:backgroundTint="@color/blue"
-                    android:textSize="@dimen/_9ssp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_gravity="end"/>
+                    android:gravity="end"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Batal"
+                        app:cornerRadius="@dimen/_10sdp"
+                        android:id="@+id/btnBatal"
+                        android:backgroundTint="@color/red"
+                        android:textSize="@dimen/_9ssp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_gravity="end"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Simpan"
+                        app:cornerRadius="@dimen/_10sdp"
+                        android:id="@+id/btnSimpan"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:backgroundTint="@color/blue"
+                        android:textSize="@dimen/_9ssp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_gravity="end"/>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
 
 
 
