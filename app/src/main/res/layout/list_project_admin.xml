@@ -216,6 +216,39 @@
                     android:textSize="@dimen/_9ssp"
                     android:textColor="@color/font_color"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:id="@+id/lrEvidence"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Evidence"
+                        android:fontFamily="@font/popmed"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_8ssp"
+                        android:textColor="@color/font_color"/>
+                    <ImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:id="@+id/ivEvidence"/>
+
+                </LinearLayout>
+
+
+
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

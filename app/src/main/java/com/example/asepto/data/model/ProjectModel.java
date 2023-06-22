@@ -1,5 +1,6 @@
 package com.example.asepto.data.model;
 
+import com.example.asepto.util.Constans;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -111,7 +112,7 @@ public class ProjectModel implements Serializable {
     }
 
     public String getGambarProject() {
-        return gambarProject;
+        return Constans.URL_EVIDENCE + gambarProject;
     }
 
     public void setGambarProject(String gambarProject) {

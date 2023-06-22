@@ -27,6 +27,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.asepto.R;
 import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
@@ -34,6 +36,7 @@ import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
 import com.example.asepto.ui.main.admin.project.ProjectFinishFragment;
 import com.example.asepto.ui.main.admin.project.UpdateProjectFragment;
+import com.example.asepto.ui.main.admin.project.ViewImageFullScreen;
 import com.example.asepto.ui.main.karyawan.progress.KaryawanProgressFragment;
 
 import java.io.File;
@@ -99,6 +102,20 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             }
         });
 
+        if (projectModelList.get(holder.getAdapterPosition()).getStatus().equals("1")) {
+            holder.btnSelesai.setVisibility(View.GONE);
+            holder.lrEvidence.setVisibility(View.VISIBLE);
+
+            Glide.with(context)
+                    .load(projectModelList.get(holder.getAdapterPosition()).getGambarProject())
+                    .centerCrop()
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(holder.ivEvidence);
+
+        }
+
+
 
     }
 
@@ -117,10 +134,11 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         ImageView ivAction, ivAction2;
         TextView tvnNamaProject, tvEmail, tvProjectScope, tvTgllMulai,
         tvTglSelesai, tvDeskripsi;
-        LinearLayout lrDetail;
+        LinearLayout lrDetail, lrEvidence;
         Button btnProgress, btnSelesai;
         ImageButton btnEdit, btnDelete;
         private RelativeLayout rlAction;
+        private ImageView ivEvidence;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivAction = itemView.findViewById(R.id.ivIconAction);
@@ -131,8 +149,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             tvTgllMulai = itemView.findViewById(R.id.tvTglMulai);
             tvTglSelesai = itemView.findViewById(R.id.tvTglSelesai);
             tvDeskripsi = itemView.findViewById(R.id.tvDeskripsi);
+            lrEvidence = itemView.findViewById(R.id.lrEvidence);
             lrDetail = itemView.findViewById(R.id.layoutDetail);
             btnSelesai = itemView.findViewById(R.id.btnFinish);
+            ivEvidence = itemView.findViewById(R.id.ivEvidence);
             btnProgress = itemView.findViewById(R.id.btnProgress);
             rlAction = itemView.findViewById(R.id.rlAction);
             btnDelete = itemView.findViewById(R.id.btnDelete);
@@ -244,6 +264,19 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
 
 
+                }
+            });
+
+            ivEvidence.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment fragment = new ViewImageFullScreen();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("image", projectModelList.get(getAdapterPosition()).getGambarProject());
+                    fragment.setArguments(bundle);
+                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frameAdmin, fragment).addToBackStack(null)
+                            .commit();
                 }
             });
         }
