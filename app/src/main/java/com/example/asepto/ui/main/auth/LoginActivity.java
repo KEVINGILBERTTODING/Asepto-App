@@ -6,9 +6,11 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.asepto.R;
@@ -30,8 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     private AuthService authService;
     private TextView tvMasuk;
     private AlertDialog progressDialog;
-    private EditText etUsername, etEmail;
-    private Button btnLogin;
+    private EditText etUsername, etEmail, etUsernameAdmin, etPassword;
+    private LinearLayout lrLoginAdmin, lrLoginKaryawan;
+    private Button btnLogin, btnKaryawan, btnAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,30 +61,74 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etUsername = findViewById(R.id.etUsername);
         btnLogin = findViewById(R.id.btnLogin);
-        tvMasuk = findViewById(R.id.tvMasuk);
+        btnKaryawan = findViewById(R.id.btnKaryawan);
+        btnAdmin = findViewById(R.id.btnAdmin);
+        etUsernameAdmin = findViewById(R.id.etUsernameAdmin);
+        etPassword = findViewById(R.id.etPassword);
+        lrLoginAdmin = findViewById(R.id.lrLoginAdmin);
+        lrLoginKaryawan = findViewById(R.id.lrLoginKaryawan);
     }
+
 
     private void listener() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etUsername.getText().toString().isEmpty()) {
-                    etUsername.setError("Tidak boleh kosong");
-                }else if (etEmail.getText().toString().isEmpty()) {
-                    etEmail.setError("Tidak boleh kosong");
+                if (lrLoginAdmin.getVisibility() == View.VISIBLE) {
+                    if (etUsernameAdmin.getText().toString().isEmpty()) {
+                        etUsernameAdmin.setError("Username tidak boleh kosong");
+                        etUsernameAdmin.requestFocus();
+                    }else if (etPassword.getText().toString().isEmpty()) {
+                        etPassword.setError("Password tidak boleh kosong");
+                        etPassword.requestFocus();
+                    }else {
+                        loginAdmin();
+                    }
+
                 }else {
-                    login();
+
+                    if (etUsername.getText().toString().isEmpty()) {
+                        etUsername.setError("Username tidak boleh kosong");
+                        etUsername.requestFocus();
+                    }else if (etEmail.getText().toString().isEmpty()) {
+                        etEmail.setError("Email tidak boleh kosong");
+                        etEmail.requestFocus();
+                    }else {
+                        login();
+                    }
+
 
                 }
             }
         });
-        tvMasuk.setOnClickListener(new View.OnClickListener() {
+
+
+
+        btnAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, AdminLoginActivity.class));
-                finish();
+                btnAdmin.setBackgroundColor(getColor(R.color.blue));
+                btnKaryawan.setBackgroundColor(getColor(R.color.blue2));
+                lrLoginKaryawan.setVisibility(View.GONE);
+                lrLoginAdmin.setVisibility(View.VISIBLE);
+
+
             }
         });
+
+
+
+        btnKaryawan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnKaryawan.setBackgroundColor(getColor(R.color.blue));
+                btnAdmin.setBackgroundColor(getColor(R.color.blue2));
+                lrLoginKaryawan.setVisibility(View.VISIBLE);
+                lrLoginAdmin.setVisibility(View.GONE);
+
+            }
+        });
+
     }
 
     private void login() {
@@ -119,6 +166,47 @@ public class LoginActivity extends AppCompatActivity {
 
 
         
+    }
+
+    private void loginAdmin() {
+        showProgressBar("Loading", "Memeriksa data...", true);
+        authService.loginAdmin(etUsernameAdmin.getText().toString(), etPassword.getText().toString())
+                .enqueue(new Callback<ResponseModel>() {
+                    @Override
+                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                        showProgressBar("sd", "SD", false);
+                        if (response.isSuccessful() && response.body().getCode() == 200) {
+                            if (response.body().getRole() == 1) { // admin
+                                editor.putBoolean("login", true);
+                                editor.putString(Constans.USER_ID, response.body().getUserId());
+                                editor.putInt(Constans.ROLE, response.body().getRole());
+                                editor.apply();
+                                startActivity(new Intent(LoginActivity.this, AdminMainActivty.class));
+                                finish();
+
+                            }else {
+                                showToast("err", "Terjadi kesalahan");
+
+                            }
+
+                        }else {
+                            showToast("err", response.body().getMessage());
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseModel> call, Throwable t) {
+                        showProgressBar("sd", "SD", false);
+                        showToast("err", "Tidak ada koneksi internet");
+
+
+
+                    }
+                });
+
+
+
     }
 
 

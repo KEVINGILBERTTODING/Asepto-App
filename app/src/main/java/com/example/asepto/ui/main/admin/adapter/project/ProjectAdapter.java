@@ -34,6 +34,7 @@ import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
+import com.example.asepto.ui.main.admin.progress.AdminProgressFragment;
 import com.example.asepto.ui.main.admin.project.ProjectFinishFragment;
 import com.example.asepto.ui.main.admin.project.UpdateProjectFragment;
 import com.example.asepto.ui.main.admin.project.ViewImageFullScreen;
@@ -163,14 +164,14 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             btnProgress.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment fragment = new KaryawanProgressFragment();
+                    Fragment fragment = new AdminProgressFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("nama_project", projectModelList.get(getAdapterPosition()).getNamaProject());
                     bundle.putString("project_id", projectModelList.get(getAdapterPosition()).getProjectId());
                     bundle.putInt("status", Integer.parseInt(projectModelList.get(getAdapterPosition()).getStatus()));
                     fragment.setArguments(bundle);
                     ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.frameKaryawn, fragment).addToBackStack(null)
+                            .replace(R.id.frameAdmin, fragment).addToBackStack(null)
                             .commit();
                 }
             });

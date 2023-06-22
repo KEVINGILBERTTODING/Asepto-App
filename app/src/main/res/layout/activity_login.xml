@@ -4,106 +4,140 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.main.auth.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:padding="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_50sdp"
+        android:padding="@dimen/_10sdp"
+        android:layout_centerVertical="true"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/main_icon"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/popsem"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_20ssp"
-            android:text="Masuk"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/popmed"
-            android:textSize="@dimen/_11ssp"
-            android:text="Silahkan Masukkan Email dan Password Anda"/>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="@dimen/_10sdp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:textColor="@color/black"
-            app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_10sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_10sdp"
-            app:boxCornerRadiusTopStart="@dimen/_10sdp">
+            android:textColor="@color/font_color"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/_12ssp"
+            android:text="Sistem Management\nKaryawan Keitoto"/>
 
-            <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="center"
+            android:background="@drawable/layout_container_login"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="@dimen/_10sdp"
+                android:text="Admin"
+                android:id="@+id/btnAdmin"
+                app:backgroundTint="@color/blue2"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                app:cornerRadius="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="Karyawan"
+                android:id="@+id/btnKaryawan"
+                app:backgroundTint="@color/blue"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/lrLoginKaryawan"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/popmed"
-                android:hint="Nama"
+                android:hint="Username"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:padding="@dimen/_10sdp"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_11sdp">
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="@dimen/_10sdp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:textColor="@color/black"
-            app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_10sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_10sdp"
-            app:boxCornerRadiusTopStart="@dimen/_10sdp">
+                android:background="@drawable/edittext_layout2"
+                android:textSize="@dimen/_13sdp">
+            </EditText>
 
-            <com.google.android.material.textfield.TextInputEditText
+
+            <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/popmed"
                 android:hint="Email"
+                android:background="@drawable/edittext_layout2"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_11sdp">
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textSize="@dimen/_13sdp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/lrLoginAdmin"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etUsernameAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:hint="Username"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:background="@drawable/edittext_layout2"
+                android:textSize="@dimen/_13sdp">
+            </EditText>
+
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/popmed"
+                android:hint="Password"
+                android:background="@drawable/edittext_layout2"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"/>
+
+        </LinearLayout>
+
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Masuk"
+            android:text="Login"
+            app:cornerRadius="@dimen/_10sdp"
+            app:backgroundTint="@color/blue"
             android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/popmed"
-                android:textSize="@dimen/_11ssp"
-                android:text="Masuk sebagai Admin? "/>
-
-            <TextView
-                android:id="@+id/tvMasuk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:fontFamily="@font/popsem"
-                android:textSize="@dimen/_11ssp"
-                android:text="Masuk"/>
-
-        </LinearLayout>
 
 
     </LinearLayout>
