@@ -12,6 +12,7 @@ import com.example.asepto.ui.main.admin.Review.AdminReviewFragment;
 import com.example.asepto.ui.main.admin.catatan.AdminCatatanFragment;
 import com.example.asepto.ui.main.admin.home.AdminHomeFragment;
 import com.example.asepto.ui.main.admin.karyawan.AdminKaryawanFragment;
+import com.example.asepto.ui.main.admin.project.AdminProjectNavbarFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -42,6 +43,9 @@ public class AdminMainActivty extends AppCompatActivity {
                     return true;
                 }else if (item.getItemId() == R.id.menuTambahan) {
                     replace(new AdminCatatanFragment());
+                    return true;
+                }else if (item.getItemId() == R.id.menuProject) {
+                    replace(new AdminProjectNavbarFragment());
                     return true;
                 }
                 return false;

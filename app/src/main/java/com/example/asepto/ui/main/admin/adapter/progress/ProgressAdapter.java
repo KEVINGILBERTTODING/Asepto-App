@@ -53,6 +53,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ViewHo
         holder.tvProgress.setText(progressModelList.get(holder.getAdapterPosition()).getProgress());
         holder.tvDate.setText(progressModelList.get(holder.getAdapterPosition()).getTanggal());
         holder.etDetail.setText(progressModelList.get(holder.getAdapterPosition()).getKeterangan());
+        holder.tvAuthor.setText(progressModelList.get(holder.getAdapterPosition()).getNama());
 
         holder.ivAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +85,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivAction, ivAction2;
-        TextView tvProgress, tvDate;
+        TextView tvProgress, tvDate, tvAuthor;
         EditText etDetail;
         LinearLayout lrDetail;
         private RelativeLayout rlAction;
@@ -95,6 +96,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ViewHo
             etDetail = itemView.findViewById(R.id.etDetail);
             tvProgress = itemView.findViewById(R.id.tvProgress);
             tvDate = itemView.findViewById(R.id.tvDate);
+            tvAuthor = itemView.findViewById(R.id.tvaUAthor);
             lrDetail = itemView.findViewById(R.id.layoutDetail);
             rlAction = itemView.findViewById(R.id.rlAction);
             karyawanService = ApiConfig.getClient().create(KaryawanService.class);

@@ -16,7 +16,8 @@ public class ProgressModel implements Serializable {
 
     @SerializedName("jabatan")
     private String jabatan;
-
+    @SerializedName("nama")
+    private String nama;
     @SerializedName("nama_project")
     private String namaProject;
 
@@ -32,11 +33,12 @@ public class ProgressModel implements Serializable {
     @SerializedName("jabatan_karyawan")
     private String jabatanKaryawan;
 
-    public ProgressModel(String progressId, String projectId, String karyawanId, String jabatan, String namaProject, String progress, String keterangan, String tanggal, String jabatanKaryawan) {
+    public ProgressModel(String progressId, String projectId, String karyawanId, String jabatan, String nama, String namaProject, String progress, String keterangan, String tanggal, String jabatanKaryawan) {
         this.progressId = progressId;
         this.projectId = projectId;
         this.karyawanId = karyawanId;
         this.jabatan = jabatan;
+        this.nama = nama;
         this.namaProject = namaProject;
         this.progress = progress;
         this.keterangan = keterangan;
@@ -74,6 +76,14 @@ public class ProgressModel implements Serializable {
 
     public void setJabatan(String jabatan) {
         this.jabatan = jabatan;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public String getNamaProject() {

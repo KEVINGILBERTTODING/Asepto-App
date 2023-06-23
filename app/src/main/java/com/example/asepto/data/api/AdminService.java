@@ -2,6 +2,7 @@ package com.example.asepto.data.api;
 
 import com.example.asepto.data.model.FeedBackModel;
 import com.example.asepto.data.model.KaryawanModel;
+import com.example.asepto.data.model.ProgressModel;
 import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
 
@@ -153,6 +154,11 @@ public interface AdminService {
             @PartMap Map<String, RequestBody> textData,
             @Part MultipartBody.Part partFile
             );
+
+    @GET("admin/getProgress")
+    Call<List<ProgressModel>> getAllProgress(
+            @Query("id") String id
+    );
 
 
 
