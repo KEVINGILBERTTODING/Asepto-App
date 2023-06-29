@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/bottom_bar"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:background="@color/bottom_bar">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Membuat design banner mneggunakan corel daw"
+                    android:layout_toLeftOf="@id/checkBox"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:id="@+id/tvTaskName"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/font_color"/>
+
+
+
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkBox"
+                        app:buttonTint="@color/blue"
+                        app:useMaterialThemeColors="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

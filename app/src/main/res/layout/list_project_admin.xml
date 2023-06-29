@@ -88,6 +88,7 @@
                 android:background="@color/black4"
                 android:id="@+id/layoutDetail"
                 android:padding="@dimen/_10sdp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical">

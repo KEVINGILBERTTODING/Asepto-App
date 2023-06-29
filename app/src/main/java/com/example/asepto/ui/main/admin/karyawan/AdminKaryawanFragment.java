@@ -30,7 +30,6 @@ import com.example.asepto.data.model.ResponseModel;
 import com.example.asepto.databinding.FragmentAdminKaryawanBinding;
 import com.example.asepto.databinding.FragmentKaryawanProgressBinding;
 import com.example.asepto.ui.main.admin.adapter.karyawan.KaryawanAdapter;
-import com.example.asepto.ui.main.karyawan.adapter.progress.ProgressAdapter;
 import com.example.asepto.util.Constans;
 
 import java.util.ArrayList;

@@ -66,7 +66,6 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_below="@+id/tvTaskName"
                     android:layout_toRightOf="@id/rlAction"
-                    android:text="2023-020"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_toLeftOf="@id/lrMenuAction"
                     android:layout_marginRight="@dimen/_10sdp"
@@ -121,6 +120,7 @@
                 android:background="@color/black4"
                 android:id="@+id/layoutDetail"
                 android:padding="@dimen/_10sdp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical">

@@ -66,4 +66,9 @@ public interface KaryawanService {
 
     @GET("karyawan/getCatatan")
     Call<List<CatatanModel>> getCatatan();
+
+    @GET("karyawan/getTotalProgress")
+    Call<ProgressModel> getTotalProgress(
+            @Query("project_id") String projectId
+    );
 }

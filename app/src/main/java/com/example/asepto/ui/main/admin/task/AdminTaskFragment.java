@@ -21,11 +21,10 @@ import com.example.asepto.R;
 import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
-import com.example.asepto.data.model.ProgressModel;
 import com.example.asepto.data.model.ResponseModel;
 import com.example.asepto.data.model.TaskModel;
 import com.example.asepto.databinding.FragmentAdminTaskBinding;
-import com.example.asepto.ui.main.admin.adapter.progress.TaskAdapter;
+import com.example.asepto.ui.main.admin.adapter.task.TaskAdapter;
 import com.example.asepto.util.Constans;
 
 import java.util.List;

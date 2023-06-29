@@ -1,13 +1,10 @@
-package com.example.asepto.ui.main.karyawan.progress;
+package com.example.asepto.ui.main.karyawan.task;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +18,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.asepto.R;
+import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
-import com.example.asepto.data.model.KaryawanModel;
-import com.example.asepto.data.model.ProgressModel;
-import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
-import com.example.asepto.databinding.FragmentKaryawanProgressBinding;
-import com.example.asepto.databinding.FragmentKaryawanProjectBinding;
-import com.example.asepto.ui.main.karyawan.adapter.progress.ProgressAdapter;
-import com.example.asepto.ui.main.karyawan.adapter.project.ProjectAdapter;
+import com.example.asepto.data.model.TaskModel;
+import com.example.asepto.databinding.FragmentKaryawanTaskBinding;
+import com.example.asepto.ui.main.karyawan.adapter.task.TaskAdapter;
 import com.example.asepto.util.Constans;
 
 import java.util.List;
@@ -40,16 +34,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KaryawanProgressFragment extends Fragment {
+public class KaryawanTaskFragment extends Fragment {
 
-    private FragmentKaryawanProgressBinding binding;
-    private List<ProgressModel> progressModelList;
+    private FragmentKaryawanTaskBinding binding;
+    private List<TaskModel> taskModelList;
     private LinearLayoutManager linearLayoutManager;
     private KaryawanService karyawanService;
+    private AdminService adminService;
     private SharedPreferences sharedPreferences;
-    private String userId, namaProject, projectId, jabatan;
+    private String userId, namaProject, projectId, karyawanId;
     private Integer status;
-    private ProgressAdapter progressAdapter;
+    private TaskAdapter taskAdapter;
     private AlertDialog progressDialog;
 
 
@@ -57,23 +52,15 @@ public class KaryawanProgressFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentKaryawanProgressBinding.inflate(inflater, container, false);
+        binding = FragmentKaryawanTaskBinding.inflate(inflater, container, false);
         sharedPreferences = getContext().getSharedPreferences(Constans.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         karyawanService = ApiConfig.getClient().create(KaryawanService.class);
+        adminService = ApiConfig.getClient().create(AdminService.class);
         userId = sharedPreferences.getString(Constans.USER_ID, null);
         namaProject = getArguments().getString("nama_project");
         projectId = getArguments().getString("project_id");
+        karyawanId = getArguments().getString("karyawan_id");
         status = getArguments().getInt("status");
-
-
-        // MENYEMBUNYIKAN BUTTON ADD
-        // PROJECT TELAH SELESAI
-        if (status == 1) {
-            binding.btnAdd.setVisibility(View.GONE);
-        } else {
-            binding.btnAdd.setVisibility(View.VISIBLE);
-        }
-
 
         return binding.getRoot();
     }
@@ -83,8 +70,7 @@ public class KaryawanProgressFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.tvNamaProject.setText(namaProject);
-        getProgress();
-        getMyProfile();
+        getTask();
         listener();
         checkDeadLineProject();
 
@@ -101,93 +87,17 @@ public class KaryawanProgressFragment extends Fragment {
             }
         });
 
-        binding.btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addProgress();
-            }
-        });
+
+
     }
-    private void addProgress() {
+    private void insertTask() {
         Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.layout_add_progress);
+        dialog.setContentView(R.layout.layout_add_task);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        EditText etProgress, etDetail;
-        etDetail = dialog.findViewById(R.id.etDetail);
-        etProgress = dialog.findViewById(R.id.etprogress);
         Button btnSimpan = dialog.findViewById(R.id.btnSimpan);
         ImageButton btnClose = dialog.findViewById(R.id.btnClose);
-
+        EditText etTask = dialog.findViewById(R.id.etTask);
         dialog.show();
-
-        etProgress.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (etProgress.getText().toString().isEmpty()) {
-                    etProgress.setError("Tidak boleh kosong");
-                }else {
-                    if (Integer.parseInt(etProgress.getText().toString()) > 100) {
-                        etProgress.setError("Tidak boleh lebih dari 100");
-                    }else if (Integer.parseInt(etProgress.getText().toString()) < 1) {
-                        etProgress.setError("Tidak boleh lebih kecil dari 1");
-                    }else if (Integer.parseInt(etProgress.getText().toString()) == 0) {
-                        etProgress.setError("Tidak valid");
-                    }
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        btnSimpan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (etProgress.getText().toString().isEmpty()) {
-                    etProgress.setError("Tidak boleh kosong");
-
-                }else if (etDetail.getText().toString().isEmpty()) {
-                    etDetail.setError("Tidak boleh kosong");
-                }else{
-                    showProgressBar("Loading", "Menyimpan data...", true);
-                    karyawanService.insertProgress(
-                            projectId, userId, jabatan, namaProject,
-                            etProgress.getText().toString()+"%",
-                            etDetail.getText().toString()
-                    ).enqueue(new Callback<ResponseModel>() {
-                        @Override
-                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                            showProgressBar("d", "d", false);
-                            if (response.isSuccessful() && response.body().getCode() == 200) {
-                                showToast("success", "Berhasil menambahkan progress");
-                                getProgress();
-                                dialog.dismiss();
-                            }else {
-                                showToast("err", "Terjadi kesalahan");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseModel> call, Throwable t) {
-                            showProgressBar("d", "d", false);
-                                showToast("err", "Tidak ada koneksi internet");
-
-
-
-                        }
-                    });
-
-                }
-            }
-        });
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,44 +105,59 @@ public class KaryawanProgressFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-    }
-    private void getMyProfile() {
-        showProgressBar("Loading", "Memuat data...", true);
-        karyawanService.getMyProfile(userId).enqueue(new Callback<KaryawanModel>() {
+
+        btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<KaryawanModel> call, Response<KaryawanModel> response) {
-                showProgressBar("d", "d", false);
-                if (response.isSuccessful() && response.body() != null) {
-                    jabatan = response.body().getJabatan();
+            public void onClick(View v) {
+                if (etTask.getText().toString().isEmpty()) {
+                    etTask.setError("Tidak boleh kosong");
+                    etTask.requestFocus();
                 }else {
-                    showToast("err", "Tidak dapat memuat data");
+                    showProgressBar("Loading", "Menambahkan task baru...", true);
+                    adminService.insertTask(
+                            projectId, etTask.getText().toString(),
+                            karyawanId
+                    ).enqueue(new Callback<ResponseModel>() {
+                        @Override
+                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                            showProgressBar("s", "s", false);
+                            if (response.isSuccessful() && response.body().getCode() == 200) {
+                                showToast("success", "Berhasil menambahkan task baru");
+                                getTask();
+                                dialog.dismiss();
+                            }else {
+                                showToast("err", "Gagal menambahkan task baru");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseModel> call, Throwable t) {
+                            showProgressBar("s", "s", false);
+                            showToast("err", "Tidak ada koneksi internet");
+
+
+
+                        }
+                    });
                 }
             }
-
-            @Override
-            public void onFailure(Call<KaryawanModel> call, Throwable t) {
-                showProgressBar("d", "d", false);
-                showToast("err", "Tidak ada koneksi internet");
-
-
-
-
-            }
         });
+
     }
-    private void getProgress() {
+
+    private void getTask() {
         showProgressBar("Loading", "Memuat data...", true);
-        karyawanService.getProgressById(userId, projectId).enqueue(new Callback<List<ProgressModel>>() {
+        adminService.getTaskByProjectId(projectId).enqueue(new Callback<List<TaskModel>>() {
             @Override
-            public void onResponse(Call<List<ProgressModel>> call, Response<List<ProgressModel>> response) {
+            public void onResponse(Call<List<TaskModel>> call, Response<List<TaskModel>> response) {
                 showProgressBar("d", "d", false);
                 if (response.isSuccessful() && response.body().size() > 0) {
-                    progressModelList = response.body();
-                    progressAdapter = new ProgressAdapter(getContext(), progressModelList);
+                    taskModelList = response.body();
+                    taskAdapter = new TaskAdapter(getContext(), taskModelList);
                     linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                    binding.rvProgress.setLayoutManager(linearLayoutManager);
-                    binding.rvProgress.setAdapter(progressAdapter);
-                    binding.rvProgress.setHasFixedSize(true);
+                    binding.rvTask.setLayoutManager(linearLayoutManager);
+                    binding.rvTask.setAdapter(taskAdapter);
+                    binding.rvTask.setHasFixedSize(true);
                     binding.tvEmpty.setVisibility(View.GONE);
 
                 }else {
@@ -241,7 +166,7 @@ public class KaryawanProgressFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<ProgressModel>> call, Throwable t) {
+            public void onFailure(Call<List<TaskModel>> call, Throwable t) {
                 showProgressBar("d", "d", false);
                 binding.tvEmpty.setVisibility(View.VISIBLE);
                 showToast("err", "Tidak ada koneksi internet");
