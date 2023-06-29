@@ -179,6 +179,13 @@ public interface AdminService {
             @Field("id") String id
     );
 
+    @FormUrlEncoded
+    @POST("admin/updateTask")
+    Call<ResponseModel> updateTask(
+            @Field("id") String id,
+            @Field("task_name") String taskName
+    );
+
 
 
 

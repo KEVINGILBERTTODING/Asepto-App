@@ -1,10 +1,12 @@
 package com.example.asepto.ui.main.admin.adapter.progress;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -156,8 +158,73 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 }
             });
 
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dialog dialogUpdateTask = new Dialog(itemView.getContext());
+                    dialogUpdateTask.setContentView(R.layout.layout_update_task);
+                    dialogUpdateTask.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    final EditText etTask = dialogUpdateTask.findViewById(R.id.etTask);
+                    final Button btnSimpan = dialogUpdateTask.findViewById(R.id.btnSimpan);
+                    final ImageButton btnClose = dialogUpdateTask.findViewById(R.id.btnClose);
+                    etTask.setText(taskModel.get(getAdapterPosition()).getTaskName());
+                    dialogUpdateTask.show();
+
+                    btnClose.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogUpdateTask.dismiss();
+                        }
+                    });
+
+                    btnSimpan.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (etTask.getText().toString().isEmpty()) {
+                                etTask.setError("Tidak boleh kosong");
+                                etTask.requestFocus();
+                            }else {
+                                showProgressBar("Loading", "Memperbaharui data...", true);
+                                adminService.updateTask(
+                                        taskModel.get(getAdapterPosition()).getTaskId(),
+                                        etTask.getText().toString()
+                                ).enqueue(new Callback<ResponseModel>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                        showProgressBar("s", "s", false);
+                                        if (response.isSuccessful() && response.body().getCode() == 200) {
+                                            taskModel.get(getAdapterPosition()).setTaskName(etTask.getText().toString());
+                                            notifyDataSetChanged();
+                                            showToast("success", "Berhasil mengubah data");
+                                            dialogUpdateTask.dismiss();
+                                        }else {
+                                            showToast("err", "Terjadi kesalahan");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                        showProgressBar("s", "s", false);
+                                        showToast("err", "Tidak ada koneksi internet");
+
+
+
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+
+                }
+            });
+
+
 
         }
+
+
+
     }
 
 
