@@ -75,6 +75,13 @@ public class InsertProjectFragment extends Fragment {
     }
 
     private void listener() {
+
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
         binding.spKategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -249,7 +256,7 @@ public class InsertProjectFragment extends Fragment {
                 }
 
                 if (dayOfMonth < 10) {
-                    dateFormatted = String.format("%02D", dayOfMonth);
+                    dateFormatted = String.format("%02d", dayOfMonth);
 
                 }else {
                     dateFormatted = String.valueOf(dayOfMonth);

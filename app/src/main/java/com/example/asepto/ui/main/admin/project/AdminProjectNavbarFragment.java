@@ -51,11 +51,7 @@ public class AdminProjectNavbarFragment extends Fragment {
         sharedPreferences = getContext().getSharedPreferences(Constans.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         adminService = ApiConfig.getClient().create(AdminService.class);
         userId = sharedPreferences.getString(Constans.USER_ID, null);
-        status = getArguments().getString("status_id");
 
-        if (status.equals("1")) {
-            binding.btnAdd.setVisibility(View.GONE);
-        }
 
 
 
@@ -66,7 +62,7 @@ public class AdminProjectNavbarFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getProject(status);
+        getProject("all");
 
         listener();
     }

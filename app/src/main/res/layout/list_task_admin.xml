@@ -18,8 +18,10 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="@dimen/_10sdp"
-                android:layout_height="wrap_content">
+                android:layout_gravity="center_vertical"
+                android:background="@color/bottom_bar">
 
                 <RelativeLayout
                     android:id="@+id/rlAction"
@@ -43,29 +45,72 @@
 
 
 
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_toRightOf="@id/rlAction"
-                    android:text="50%"
-                    android:id="@+id/tvProgress"
+                    android:text="Membuat design banner mneggunakan corel daw"
+                    android:layout_toLeftOf="@id/lrMenuAction"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:id="@+id/tvTaskName"
                     android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_10ssp"
                     android:textColor="@color/font_color"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_alignParentRight="true"
-                    android:text="2023-02-023-203"
+                    android:layout_below="@+id/tvTaskName"
+                    android:layout_toRightOf="@id/rlAction"
+                    android:text="2023-020"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_toLeftOf="@id/lrMenuAction"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:id="@+id/tvDate"
                     android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_9ssp"
+                    android:textSize="@dimen/_8ssp"
                     android:textColor="@color/font_color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_below="@+id/tvDate"
+                    android:layout_toRightOf="@id/rlAction"
+                    android:text="Selesai"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_toLeftOf="@id/lrMenuAction"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:id="@+id/tvStatus"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/font_color"/>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lrMenuAction"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/btnEdit"
+                        android:background="@drawable/ic_edit"/>
+
+                    <ImageButton
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:id="@+id/btnDelete"
+                        android:background="@drawable/ic_trash2"/>
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -82,55 +127,52 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
-                    android:text="Author"
+                    android:text="Nama Karyawan"
                     android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_9ssp"
+                    android:textSize="@dimen/_8ssp"
                     android:textColor="@color/font_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:id="@+id/tvaUAthor"
+                    android:text="keitoto@gmail.com"
+                    android:id="@+id/tvNamaKaryawan"
                     android:fontFamily="@font/popmed"
-                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_9ssp"
                     android:textColor="@color/font_color"/>
-
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@color/black3"/>
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
-                    android:text="Detail"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Keterangan Selesai"
                     android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/font_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desig UI Ux"
+                    android:id="@+id/tvKeteranganSelesai"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:textSize="@dimen/_9ssp"
                     android:textColor="@color/font_color"/>
 
-
-                <EditText
+                <View
                     android:layout_width="match_parent"
-                    android:background="@drawable/edittext_layout"
-                    android:padding="@dimen/_10sdp"
-                    android:id="@+id/etDetail"
-                    android:hint="Detail"
-                    android:enabled="false"
-                    android:textColorHint="@color/font_color"
-                    android:textColor="@color/font_color"
+                    android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/popmed"
-                    android:lines="4"
-                    android:gravity="start"
-                    android:textSize="@dimen/_10ssp"
-                    android:layout_height="wrap_content"/>
+                    android:background="@color/black3"/>
 
 
 

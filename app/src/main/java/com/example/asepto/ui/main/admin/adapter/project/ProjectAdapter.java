@@ -1,20 +1,13 @@
 package com.example.asepto.ui.main.admin.adapter.project;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,17 +26,11 @@ import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
-import com.example.asepto.ui.main.admin.progress.AdminProgressFragment;
+import com.example.asepto.ui.main.admin.task.AdminTaskFragment;
 import com.example.asepto.ui.main.admin.project.ProjectFinishFragment;
 import com.example.asepto.ui.main.admin.project.UpdateProjectFragment;
 import com.example.asepto.ui.main.admin.project.ViewImageFullScreen;
-import com.example.asepto.ui.main.karyawan.progress.KaryawanProgressFragment;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,7 +122,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         TextView tvnNamaProject, tvEmail, tvProjectScope, tvTgllMulai,
         tvTglSelesai, tvDeskripsi;
         LinearLayout lrDetail, lrEvidence;
-        Button btnProgress, btnSelesai;
+        Button btnTask, btnSelesai;
         ImageButton btnEdit, btnDelete;
         private RelativeLayout rlAction;
         private ImageView ivEvidence;
@@ -154,20 +140,21 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             lrDetail = itemView.findViewById(R.id.layoutDetail);
             btnSelesai = itemView.findViewById(R.id.btnFinish);
             ivEvidence = itemView.findViewById(R.id.ivEvidence);
-            btnProgress = itemView.findViewById(R.id.btnProgress);
+            btnTask = itemView.findViewById(R.id.btnTask);
             rlAction = itemView.findViewById(R.id.rlAction);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnEdit = itemView.findViewById(R.id.btnEdit);
 
             adminService = ApiConfig.getClient().create(AdminService.class);
 
-            btnProgress.setOnClickListener(new View.OnClickListener() {
+            btnTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment fragment = new AdminProgressFragment();
+                    Fragment fragment = new AdminTaskFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("nama_project", projectModelList.get(getAdapterPosition()).getNamaProject());
                     bundle.putString("project_id", projectModelList.get(getAdapterPosition()).getProjectId());
+                    bundle.putString("karyawan_id", projectModelList.get(getAdapterPosition()).getKaryawanId());
                     bundle.putInt("status", Integer.parseInt(projectModelList.get(getAdapterPosition()).getStatus()));
                     fragment.setArguments(bundle);
                     ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()

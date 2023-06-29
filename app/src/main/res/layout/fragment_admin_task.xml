@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_toRightOf="@id/btnBack"
-                    android:text="Daftar Progress"
+                    android:text="Daftar Task"
                     android:id="@+id/tv1"
                     android:textSize="@dimen/_15ssp"
                     android:fontFamily="@font/popsem"
@@ -68,6 +68,16 @@
             android:visibility="gone"
             android:fontFamily="@font/popsem"
             android:textColor="@color/font_color"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_add_24"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/btnAdd"
+            app:backgroundTint="@color/bottom_bar"
+            app:tint="@color/blue"/>
 
 
 

@@ -88,7 +88,6 @@
                 android:background="@color/black4"
                 android:id="@+id/layoutDetail"
                 android:padding="@dimen/_10sdp"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical">
@@ -259,9 +258,9 @@
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Progress"
+                        android:text="Task"
                         app:cornerRadius="@dimen/_10sdp"
-                        android:id="@+id/btnProgress"
+                        android:id="@+id/btnTask"
                         android:backgroundTint="@color/yellow"
                         android:textSize="@dimen/_9ssp"
                         android:layout_gravity="end"/>

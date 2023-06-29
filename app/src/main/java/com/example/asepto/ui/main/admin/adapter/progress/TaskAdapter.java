@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,44 +15,63 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asepto.R;
+import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
-import com.example.asepto.data.model.ProgressModel;
-import com.example.asepto.data.model.ResponseModel;
+import com.example.asepto.data.model.TaskModel;
 
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ViewHolder> {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     Context context;
-    List<ProgressModel> progressModelList;
+    List<TaskModel> taskModel;
     private AlertDialog progressDialog;
-    private KaryawanService karyawanService;
+    private AdminService adminService;
 
-    public ProgressAdapter(Context context, List<ProgressModel> progressModelList) {
+    public TaskAdapter(Context context, List<TaskModel> taskModel) {
         this.context = context;
-        this.progressModelList = progressModelList;
+        this.taskModel = taskModel;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.list_progress_admin, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.list_task_admin, parent, false);
         return new ViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.tvTaskName.setText(taskModel.get(holder.getAdapterPosition()).getTaskName());
+        holder.tvDatePost.setText(taskModel.get(holder.getAdapterPosition()).getDatePost());
 
-        holder.tvProgress.setText(progressModelList.get(holder.getAdapterPosition()).getProgress());
-        holder.tvDate.setText(progressModelList.get(holder.getAdapterPosition()).getTanggal());
-        holder.etDetail.setText(progressModelList.get(holder.getAdapterPosition()).getKeterangan());
-        holder.tvAuthor.setText(progressModelList.get(holder.getAdapterPosition()).getNama());
+        holder.tvNamaKaryawan.setText(taskModel.get(holder.getAdapterPosition()).getNamaKaryawan());
+        holder.tvKeterangan.setText(taskModel.get(holder.getAdapterPosition()).getKeterangan());
+        holder.tvTaskName.setText(taskModel.get(holder.getAdapterPosition()).getTaskName());
+
+        if (taskModel.get(holder.getAdapterPosition()).getStatus() == 1) {
+            holder.tvStatus.setText("Selesai");
+            holder.tvStatus.setTextColor(context.getColor(R.color.blue));
+        }else {
+            holder.tvStatus.setText("Belum selesai");
+            holder.tvStatus.setTextColor(context.getColor(R.color.red));
+        }
+
+
+
+        if (taskModel.get(holder.getAdapterPosition()).getDatePost() == null) {
+            holder.tvDatePost.setVisibility(View.GONE);
+        }else {
+            holder.tvDatePost.setVisibility(View.VISIBLE);
+        }
+
+        if (taskModel.get(holder.getAdapterPosition()).getKeterangan() == null)
+
+
+
 
         holder.ivAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,26 +98,27 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return progressModelList.size();
+        return taskModel.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivAction, ivAction2;
-        TextView tvProgress, tvDate, tvAuthor;
-        EditText etDetail;
+        TextView tvTaskName, tvDatePost, tvStatus, tvNamaKaryawan, tvKeterangan;
+
         LinearLayout lrDetail;
         private RelativeLayout rlAction;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivAction = itemView.findViewById(R.id.ivIconAction);
             ivAction2 = itemView.findViewById(R.id.ivIconAction2);
-            etDetail = itemView.findViewById(R.id.etDetail);
-            tvProgress = itemView.findViewById(R.id.tvProgress);
-            tvDate = itemView.findViewById(R.id.tvDate);
-            tvAuthor = itemView.findViewById(R.id.tvaUAthor);
+            tvTaskName = itemView.findViewById(R.id.tvTaskName);
+            tvDatePost = itemView.findViewById(R.id.tvDate);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
+            tvNamaKaryawan = itemView.findViewById(R.id.tvNamaKaryawan);
+            tvKeterangan = itemView.findViewById(R.id.tvKeteranganSelesai);
             lrDetail = itemView.findViewById(R.id.layoutDetail);
             rlAction = itemView.findViewById(R.id.rlAction);
-            karyawanService = ApiConfig.getClient().create(KaryawanService.class);
+            adminService = ApiConfig.getClient().create(AdminService.class);
 
 
         }

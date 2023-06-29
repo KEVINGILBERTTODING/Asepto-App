@@ -5,6 +5,7 @@ import com.example.asepto.data.model.KaryawanModel;
 import com.example.asepto.data.model.ProgressModel;
 import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
+import com.example.asepto.data.model.TaskModel;
 
 import java.util.List;
 import java.util.Map;
@@ -157,6 +158,18 @@ public interface AdminService {
 
     @GET("admin/getProgress")
     Call<List<ProgressModel>> getAllProgress(
+            @Query("id") String id
+    );
+    @FormUrlEncoded
+    @POST("admin/insertTask")
+    Call<ResponseModel> insertTask(
+            @Field("project_id") String project_id,
+            @Field("task_name") String task_name,
+            @Field("karyawan_id") String karyawan_id
+    );
+
+    @GET("admin/getTaskByProject")
+    Call<List<TaskModel>> getTaskByProjectId(
             @Query("id") String id
     );
 
