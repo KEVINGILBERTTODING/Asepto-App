@@ -173,6 +173,12 @@ public interface AdminService {
             @Query("id") String id
     );
 
+    @FormUrlEncoded
+    @POST("admin/deleteTask")
+    Call<ResponseModel> deleteTask(
+            @Field("id") String id
+    );
+
 
 
 
