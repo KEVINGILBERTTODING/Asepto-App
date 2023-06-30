@@ -3,6 +3,7 @@ package com.example.asepto.ui.main.karyawan.adapter.task;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.asepto.R;
 import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
+import com.example.asepto.data.api.KaryawanService;
 import com.example.asepto.data.model.ResponseModel;
 import com.example.asepto.data.model.TaskModel;
 
@@ -36,7 +38,19 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     Context context;
     List<TaskModel> taskModel;
     private AlertDialog progressDialog;
-    private AdminService adminService;
+    private KaryawanService karyawanService;
+
+    private OnButtonClickListener onButtonClickListener;
+
+
+    public void setOnButtonClickListener(OnButtonClickListener listener) {
+        this.onButtonClickListener = listener;
+    }
+
+
+    public interface OnButtonClickListener {
+        void onButtonClicked();
+    }
 
     public TaskAdapter(Context context, List<TaskModel> taskModel) {
         this.context = context;
@@ -66,10 +80,89 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (holder.checkBox.isChecked()) {
-                    showToast("success", "Button is checked");
-                }else {
-                    showToast("successs", "Button  unchecked");
+                if (isChecked == true) {
+
+                        Dialog dialogInsertKeterangan = new Dialog(context);
+                        dialogInsertKeterangan.setContentView(R.layout.layout_add_keterangan_task);
+                        dialogInsertKeterangan.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                        EditText etKeterangan = dialogInsertKeterangan.findViewById(R.id.etKeterangan);
+                        Button btnSimpan = dialogInsertKeterangan.findViewById(R.id.btnSimpan);
+                        ImageButton btnClose = dialogInsertKeterangan.findViewById(R.id.btnClose);
+                        dialogInsertKeterangan.show();
+
+                        btnClose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogInsertKeterangan.dismiss();
+                                holder.checkBox.setChecked(false);
+                            }
+                        });
+
+                        btnSimpan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (etKeterangan.getText().toString().isEmpty()) {
+                                    etKeterangan.setError("Tidak boleh kosong");
+                                    etKeterangan.requestFocus();
+                                } else {
+                                    showProgressBar("Loading", "Checked task...", true);
+                                    karyawanService.taskCompleted(
+                                            taskModel.get(holder.getAdapterPosition()).getTaskId(),
+                                            etKeterangan.getText().toString()
+                                    ).enqueue(new Callback<ResponseModel>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                            showProgressBar("s", "s", false);
+                                            if (response.isSuccessful() && response.body().getCode() == 200) {
+                                                showToast("success", "Task completed");
+                                                onButtonClickListener.onButtonClicked();
+                                                taskModel.get(holder.getAdapterPosition()).setStatus(1);
+                                                dialogInsertKeterangan.dismiss();
+                                                holder.checkBox.setChecked(true);
+                                                notifyDataSetChanged();
+                                            } else {
+                                                showToast("err", "Terjadi kesalahan");
+                                                holder.checkBox.setChecked(false);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                            showProgressBar("s", "s", false);
+                                            showToast("err", "Tidak ada koneksi internet");
+                                            holder.checkBox.setChecked(false);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+
+                } else if (isChecked == false) {
+                    showProgressBar("Loading", "Unchecked task", true);
+                    karyawanService.taskUnCompleted(taskModel.get(holder.getAdapterPosition()).getTaskId())
+                            .enqueue(new Callback<ResponseModel>() {
+                                @Override
+                                public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                    showProgressBar("s", "s", false);
+                                    if (response.isSuccessful() && response.body().getCode() == 200) {
+                                        holder.checkBox.setChecked(false);
+                                        taskModel.get(holder.getAdapterPosition()).setStatus(0);
+                                        notifyDataSetChanged();
+                                        Toasty.normal(context, "Task unchecked", Toasty.LENGTH_SHORT).show();
+                                        onButtonClickListener.onButtonClicked();
+
+                                    } else {
+                                        showToast("err", "Terjadi Kesalahan");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                    showProgressBar("s", "s", false);
+                                    showToast("err", "Tidak ada koneksi internet");
+                                }
+                            });
                 }
             }
         });
@@ -100,7 +193,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             tvTaskName = itemView.findViewById(R.id.tvTaskName);
             rlAction = itemView.findViewById(R.id.rlAction);
             checkBox = itemView.findViewById(R.id.checkBox);
-            adminService = ApiConfig.getClient().create(AdminService.class);
+            karyawanService = ApiConfig.getClient().create(KaryawanService.class);
 
 
 
@@ -138,4 +231,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             Toasty.error(context, text, Toasty.LENGTH_SHORT).show();
         }
     }
+
+
+
 }

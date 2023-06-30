@@ -21,6 +21,7 @@ import com.example.asepto.R;
 import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
+import com.example.asepto.data.model.ProgressModel;
 import com.example.asepto.data.model.ResponseModel;
 import com.example.asepto.data.model.TaskModel;
 import com.example.asepto.databinding.FragmentKaryawanTaskBinding;
@@ -34,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KaryawanTaskFragment extends Fragment {
+public class KaryawanTaskFragment extends Fragment implements TaskAdapter.OnButtonClickListener {
 
     private FragmentKaryawanTaskBinding binding;
     private List<TaskModel> taskModelList;
@@ -71,6 +72,7 @@ public class KaryawanTaskFragment extends Fragment {
 
         binding.tvNamaProject.setText(namaProject);
         getTask();
+        getTotalProgress();
         listener();
         checkDeadLineProject();
 
@@ -89,59 +91,6 @@ public class KaryawanTaskFragment extends Fragment {
 
 
 
-    }
-    private void insertTask() {
-        Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.layout_add_task);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        Button btnSimpan = dialog.findViewById(R.id.btnSimpan);
-        ImageButton btnClose = dialog.findViewById(R.id.btnClose);
-        EditText etTask = dialog.findViewById(R.id.etTask);
-        dialog.show();
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        btnSimpan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (etTask.getText().toString().isEmpty()) {
-                    etTask.setError("Tidak boleh kosong");
-                    etTask.requestFocus();
-                }else {
-                    showProgressBar("Loading", "Menambahkan task baru...", true);
-                    adminService.insertTask(
-                            projectId, etTask.getText().toString(),
-                            karyawanId
-                    ).enqueue(new Callback<ResponseModel>() {
-                        @Override
-                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                            showProgressBar("s", "s", false);
-                            if (response.isSuccessful() && response.body().getCode() == 200) {
-                                showToast("success", "Berhasil menambahkan task baru");
-                                getTask();
-                                dialog.dismiss();
-                            }else {
-                                showToast("err", "Gagal menambahkan task baru");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseModel> call, Throwable t) {
-                            showProgressBar("s", "s", false);
-                            showToast("err", "Tidak ada koneksi internet");
-
-
-
-                        }
-                    });
-                }
-            }
-        });
 
     }
 
@@ -158,6 +107,7 @@ public class KaryawanTaskFragment extends Fragment {
                     binding.rvTask.setLayoutManager(linearLayoutManager);
                     binding.rvTask.setAdapter(taskAdapter);
                     binding.rvTask.setHasFixedSize(true);
+                    taskAdapter.setOnButtonClickListener(KaryawanTaskFragment.this);
                     binding.tvEmpty.setVisibility(View.GONE);
 
                 }else {
@@ -170,6 +120,34 @@ public class KaryawanTaskFragment extends Fragment {
                 showProgressBar("d", "d", false);
                 binding.tvEmpty.setVisibility(View.VISIBLE);
                 showToast("err", "Tidak ada koneksi internet");
+
+            }
+        });
+
+    }
+
+    private void getTotalProgress() {
+        showProgressBar("Loading", "Memuat data...", false);
+        karyawanService.getTotalProgress(projectId).enqueue(new Callback<ProgressModel>() {
+            @Override
+            public void onResponse(Call<ProgressModel> call, Response<ProgressModel> response) {
+                showProgressBar("s", "s", false);
+                if (response.isSuccessful() && response.body().getCode() == 200) {
+                    binding.tvProgress.setText(String.valueOf(response.body().getProgress() + "%"));
+                    binding.progressBar.setProgress(Integer.parseInt(String.valueOf(response.body().getProgress())));
+                }else {
+                    binding.progressBar.setProgress(0);
+                    binding.tvProgress.setText("0%");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProgressModel> call, Throwable t) {
+                showProgressBar("s", "s", false);
+                showToast("err", "Tidak ada koneksi internet");
+
+                binding.progressBar.setProgress(0);
+                binding.tvProgress.setText("0%");
 
             }
         });
@@ -235,4 +213,9 @@ public class KaryawanTaskFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onButtonClicked() {
+        getTotalProgress();
+
+    }
 }

@@ -71,4 +71,18 @@ public interface KaryawanService {
     Call<ProgressModel> getTotalProgress(
             @Query("project_id") String projectId
     );
+    @FormUrlEncoded
+    @POST("karyawan/taskCompleted")
+    Call<ResponseModel> taskCompleted(
+            @Field("id") String id,
+            @Field("keterangan") String keterangan
+
+    );
+
+    @FormUrlEncoded
+    @POST("karyawan/taskUnCompleted")
+    Call<ResponseModel> taskUnCompleted(
+            @Field("id") String id
+
+    );
 }
