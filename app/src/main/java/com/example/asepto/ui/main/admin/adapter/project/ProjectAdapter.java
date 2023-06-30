@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,6 +25,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.asepto.R;
 import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
+import com.example.asepto.data.api.KaryawanService;
+import com.example.asepto.data.model.ProgressModel;
 import com.example.asepto.data.model.ProjectModel;
 import com.example.asepto.data.model.ResponseModel;
 import com.example.asepto.ui.main.admin.task.AdminTaskFragment;
@@ -44,6 +47,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     List<ProjectModel> projectModelList;
     private AlertDialog progressDialog;
     private AdminService adminService;
+    private KaryawanService karyawanService;
 
 
     public ProjectAdapter(Context context, List<ProjectModel> projectModelList) {
@@ -68,6 +72,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         holder.tvTgllMulai.setText(projectModelList.get(holder.getAdapterPosition()).getTglMulai());
         holder.tvTglSelesai.setText(projectModelList.get(holder.getAdapterPosition()).getTglSelesai());
         holder.tvDeskripsi.setText(projectModelList.get(holder.getAdapterPosition()).getDeskripsiProject());
+        holder.tvNamaKaryawan.setText(projectModelList.get(holder.getAdapterPosition()).getNama());
 
         holder.ivAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +107,33 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
         }
 
+        showProgressBar("Loading", "Memuat data...", false);
+        karyawanService.getTotalProgress(projectModelList.get(holder.getAdapterPosition()).getProjectId())
+                .enqueue(new Callback<ProgressModel>() {
+                    @Override
+                    public void onResponse(Call<ProgressModel> call, Response<ProgressModel> response) {
+                        showProgressBar("s", "s", false);
+                        if (response.isSuccessful() && response.body().getCode() == 200) {
+                            holder.progressBar.setProgress(response.body().getProgress());
+                            holder.tvProgress.setText(String.valueOf(response.body().getProgress() + "%"));
+                        }else {
+                            holder.progressBar.setProgress(0);
+                            holder.tvProgress.setText(0 + "%");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ProgressModel> call, Throwable t) {
+                        showProgressBar("s", "s", false);
+                        holder.progressBar.setProgress(0);
+                        holder.tvProgress.setText("Gagal memuat data");
+
+
+
+
+                    }
+                });
+
 
 
     }
@@ -120,11 +152,12 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder  {
         ImageView ivAction, ivAction2;
         TextView tvnNamaProject, tvEmail, tvProjectScope, tvTgllMulai,
-        tvTglSelesai, tvDeskripsi;
+        tvTglSelesai, tvDeskripsi, tvNamaKaryawan, tvProgress;
         LinearLayout lrDetail, lrEvidence;
         Button btnTask, btnSelesai;
         ImageButton btnEdit, btnDelete;
         private RelativeLayout rlAction;
+        private ProgressBar progressBar;
         private ImageView ivEvidence;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -136,6 +169,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             tvTgllMulai = itemView.findViewById(R.id.tvTglMulai);
             tvTglSelesai = itemView.findViewById(R.id.tvTglSelesai);
             tvDeskripsi = itemView.findViewById(R.id.tvDeskripsi);
+            tvNamaKaryawan = itemView.findViewById(R.id.tvNamaKaryawan);
             lrEvidence = itemView.findViewById(R.id.lrEvidence);
             lrDetail = itemView.findViewById(R.id.layoutDetail);
             btnSelesai = itemView.findViewById(R.id.btnFinish);
@@ -143,7 +177,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             btnTask = itemView.findViewById(R.id.btnTask);
             rlAction = itemView.findViewById(R.id.rlAction);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            tvProgress = itemView.findViewById(R.id.tvProgress);
+            progressBar = itemView.findViewById(R.id.progressBar);
             btnEdit = itemView.findViewById(R.id.btnEdit);
+            karyawanService = ApiConfig.getClient().create(KaryawanService.class);
 
             adminService = ApiConfig.getClient().create(AdminService.class);
 

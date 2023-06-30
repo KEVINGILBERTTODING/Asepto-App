@@ -47,7 +47,6 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_toRightOf="@id/rlAction"
@@ -58,6 +57,42 @@
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_11ssp"
                     android:textColor="@color/font_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_toRightOf="@id/rlAction"
+                    android:layout_below="@id/tvNamaProject"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/popmed"
+                        android:textColor="@color/font_color"
+                        android:textSize="@dimen/_11ssp"
+                        android:text="20%"/>
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_toRightOf="@id/tvProgress"
+                        app:indicatorColor="@color/blue"
+                        app:trackThickness="@dimen/_5sdp"
+                        android:id="@+id/progressBar"
+                        app:trackCornerRadius="@dimen/_10sdp"
+                        android:progress="50"
+                        android:backgroundTint="@color/blue"
+                        android:layout_below="@id/tvNamaProject"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_11ssp"
+                        android:textColor="@color/font_color"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -83,6 +118,8 @@
 
 
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:background="@color/black4"
@@ -96,7 +133,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email Perusahaan"
+                    android:text="Nama Karyawan"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_8ssp"
                     android:textColor="@color/font_color"/>
@@ -104,7 +141,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="keitoto@gmail.com"
+                    android:id="@+id/tvNamaKaryawan"
+                    android:fontFamily="@font/popmed"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_9ssp"
+                    android:textColor="@color/font_color"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/black3"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email Perusahaan"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/popmed"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/font_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/tvEmailPerusahaan"
                     android:fontFamily="@font/popmed"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -129,7 +190,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Desig UI Ux"
                     android:id="@+id/tvProjectScope"
                     android:fontFamily="@font/popmed"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -209,7 +269,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Desig UI Ux"
                     android:id="@+id/tvDeskripsi"
                     android:fontFamily="@font/popmed"
                     android:layout_marginTop="@dimen/_5sdp"

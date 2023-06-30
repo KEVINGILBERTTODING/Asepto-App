@@ -21,6 +21,7 @@ import com.example.asepto.R;
 import com.example.asepto.data.api.AdminService;
 import com.example.asepto.data.api.ApiConfig;
 import com.example.asepto.data.api.KaryawanService;
+import com.example.asepto.data.model.ProgressModel;
 import com.example.asepto.data.model.ResponseModel;
 import com.example.asepto.data.model.TaskModel;
 import com.example.asepto.databinding.FragmentAdminTaskBinding;
@@ -72,6 +73,7 @@ public class AdminTaskFragment extends Fragment {
         binding.tvNamaProject.setText(namaProject);
         getTask();
         listener();
+        getTotalProgress();
         checkDeadLineProject();
 
     }
@@ -177,6 +179,34 @@ public class AdminTaskFragment extends Fragment {
                 showProgressBar("d", "d", false);
                 binding.tvEmpty.setVisibility(View.VISIBLE);
                 showToast("err", "Tidak ada koneksi internet");
+
+            }
+        });
+
+    }
+
+    private void getTotalProgress() {
+        showProgressBar("Loading", "Memuat data...", false);
+        karyawanService.getTotalProgress(projectId).enqueue(new Callback<ProgressModel>() {
+            @Override
+            public void onResponse(Call<ProgressModel> call, Response<ProgressModel> response) {
+                showProgressBar("s", "s", false);
+                if (response.isSuccessful() && response.body().getCode() == 200) {
+                    binding.tvProgress.setText(String.valueOf(response.body().getProgress() + "%"));
+                    binding.progressBar.setProgress(Integer.parseInt(String.valueOf(response.body().getProgress())));
+                }else {
+                    binding.progressBar.setProgress(0);
+                    binding.tvProgress.setText("0%");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProgressModel> call, Throwable t) {
+                showProgressBar("s", "s", false);
+                showToast("err", "Tidak ada koneksi internet");
+
+                binding.progressBar.setProgress(0);
+                binding.tvProgress.setText("0%");
 
             }
         });

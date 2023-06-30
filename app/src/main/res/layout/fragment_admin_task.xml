@@ -47,6 +47,43 @@
                     android:layout_below="@id/tv1"
                     android:fontFamily="@font/popmed"
                     android:textColor="@color/font_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/lrProgressBar"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@id/btnBack"
+                    android:layout_below="@id/tvNamaProject"
+                    android:orientation="vertical">
+
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tvProgress"
+                        app:indicatorColor="@color/blue"
+                        app:trackThickness="@dimen/_5sdp"
+                        android:id="@+id/progressBar"
+                        app:trackCornerRadius="@dimen/_10sdp"
+                        android:backgroundTint="@color/blue"
+                        android:layout_below="@id/tvNamaProject"
+                        android:fontFamily="@font/popmed"
+                        android:textSize="@dimen/_11ssp"
+                        android:textColor="@color/font_color"/>
+
+                    <TextView
+                        android:id="@+id/tvProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/popmed"
+                        android:textColor="@color/font_color"
+                        android:textSize="@dimen/_11ssp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        />
+
+                </LinearLayout>
             </RelativeLayout>
         </com.google.android.material.appbar.AppBarLayout>
 

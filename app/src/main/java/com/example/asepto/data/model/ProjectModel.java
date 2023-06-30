@@ -53,6 +53,7 @@ public class ProjectModel implements Serializable {
         @SerializedName("status")
         private String status;
 
+
     public ProjectModel(String id, String projectId, String namaProject, String deskripsiProject, String kategori, String gambarProject, String tglMulai, String tglSelesai, String namaPerusahaan, String emailPerusahaan, String tipePerusahaan, String budget, String karyawanId, String nama, String status) {
         this.id = id;
         this.projectId = projectId;
