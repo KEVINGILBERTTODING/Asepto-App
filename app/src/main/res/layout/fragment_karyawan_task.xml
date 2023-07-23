@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_toRightOf="@id/btnBack"
-                    android:text="Daftar Task"
+                    android:text="Daftar Tugas"
                     android:id="@+id/tv1"
                     android:textSize="@dimen/_15ssp"
                     android:fontFamily="@font/popsem"

@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/btnBack"
-                    android:text="Update Karyawan"
+                    android:text="Ubah Karyawan"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:id="@+id/tv1"
                     android:textSize="@dimen/_15ssp"

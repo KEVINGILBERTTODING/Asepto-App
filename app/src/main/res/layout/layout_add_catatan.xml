@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
-                    android:text="Add Catatan"
+                    android:text="Tambah Catatan"
                     android:id="@+id/tvProgress"
                     android:fontFamily="@font/popmed"
                     android:textSize="@dimen/_12ssp"
